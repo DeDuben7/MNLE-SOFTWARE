@@ -46,15 +46,7 @@
 
 /* USER CODE BEGIN PV */
 uint8_t data;
-uint8_t buf1[3];
-uint8_t buf2[3];
-uint8_t buflen;
-uint8_t buf1len;
-uint8_t buf2len;
-uint8_t BUF1_FLAG = FALSE;
-uint8_t BUF2_FLAG = FALSE;
-uint8_t BUF1_FULL = FALSE;
-uint8_t BUF2_FULL = FALSE;
+uint8_t ReceiveFlag = FALSE;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -67,7 +59,7 @@ static void MX_SPI2_Init(void);
 static void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN PFP */
-uint8_t byte = 0;
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -115,20 +107,11 @@ int main(void)
 
   while (1)
   {
-	  if(BUF1_FULL)
+	  if(ReceiveFlag)
 	  {
-		  MIDI_PROC(buf1, buf1len);
-		  HAL_UART_Transmit_IT(&huart2, buf1, 3);
-		  BUF1_FULL = FALSE;
+		  ReceiveFlag = FALSE;
+		  //MIDI_PROC(data);
 	  }
-
-	  if(BUF2_FULL)
-	  {
-		  MIDI_PROC(buf2, buf2len);
-		  HAL_UART_Transmit_IT(&huart2, buf2, 3);
-		  BUF2_FULL = FALSE;
-	  }
-
   }
 }
 
@@ -138,58 +121,10 @@ int main(void)
   */
 void USART2_IRQHandler(void)
 {
-	HAL_UART_IRQHandler(&huart2);
+	ReceiveFlag = TRUE;
+	HAL_UART_Receive_IT(&huart2, &data, 1);
 }
 
-/* This callback is called by the HAL_UART_IRQHandler when the given number of bytes are received */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-	if (huart->Instance == USART2)
-	{
-		//HAL_UART_Transmit_IT(&huart2, &data, 1);
-		if(data & 128) //check if new data block is received
-		{
-			if((BUF1_FLAG != 1) && (BUF2_FLAG != 1)) //first time
-			{
-				HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-				BUF1_FLAG = TRUE;
-				buflen = 0;
-				buf1[buflen++] = data;
-			}
-
-			else if((BUF1_FLAG != 1) && (BUF2_FLAG == 1)) //write new data to buf1 and send buf2 to MIDI_CONT
-			{
-				BUF2_FULL = TRUE;
-				buf2len = buflen;
-				BUF1_FLAG = TRUE;
-				BUF2_FLAG = FALSE;
-				buflen = 0;
-				buf1[buflen++] = data;
-			}
-
-			else if((BUF1_FLAG == 1) && (BUF2_FLAG != 1)) //write new data to buf2 and send buf1 to MIDI_CONT
-			{
-				BUF1_FULL = TRUE;
-				buf1len = buflen;
-				BUF1_FLAG = FALSE;
-				BUF2_FLAG = TRUE;
-				buflen = 0;
-				buf2[buflen++] = data;
-			}
-		}
-
-		else
-		{
-			if((BUF1_FLAG != 1) && (BUF2_FLAG == 1)) //write data to buf2
-				buf2[buflen++] = data;
-
-			else if((BUF1_FLAG == 1) && (BUF2_FLAG != 1)) //write data to buf1
-				buf1[buflen++] = data;
-		}
-
-		HAL_UART_Receive_IT(&huart2, &data, 1);
-	}
-}
 
 /**
   * @brief System Clock Configuration
