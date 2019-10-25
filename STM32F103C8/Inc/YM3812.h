@@ -8,6 +8,6 @@
 #ifndef YM3812_H_
 #define YM3812_H_
 
-
+#include "includes.h"
 
 #endif /* YM3812_H_ */

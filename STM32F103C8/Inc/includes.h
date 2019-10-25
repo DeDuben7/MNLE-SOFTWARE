@@ -54,6 +54,7 @@
 
 #include "midi.h"
 #include "main.h"
+#include "YM3812.h"
 //#include "midi.c"
 
 /*
