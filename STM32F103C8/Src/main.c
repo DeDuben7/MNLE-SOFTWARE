@@ -110,7 +110,8 @@ int main(void)
 	  if(ReceiveFlag)
 	  {
 		  ReceiveFlag = FALSE;
-		  //MIDI_PROC(data);
+		  HAL_UART_Receive_IT(&huart2, &data, 1);
+		  MIDI_PROC(data);
 	  }
   }
 }
@@ -121,11 +122,17 @@ int main(void)
   */
 void USART2_IRQHandler(void)
 {
-	ReceiveFlag = TRUE;
-	HAL_UART_Receive_IT(&huart2, &data, 1);
+	HAL_UART_IRQHandler(&huart2);
 }
 
-
+/* This callback is called by the HAL_UART_IRQHandler when the given number of bytes are received */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if (huart->Instance == USART2)
+	{
+		ReceiveFlag = TRUE;
+	}
+}
 /**
   * @brief System Clock Configuration
   * @retval None
