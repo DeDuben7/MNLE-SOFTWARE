@@ -427,10 +427,10 @@ void GPIO_Init()
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 
-	//LED PIN
-	GPIO_InitStruct.Pin = GPIO_PIN_13;
+	//LED PIN - Voor nu pinnen d0-d1 vor YM aansturing
+	GPIO_InitStruct.Pin = GPIO_PIN_13|| GPIO_PIN_14;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
 	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 }
