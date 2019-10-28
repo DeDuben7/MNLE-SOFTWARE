@@ -63,24 +63,6 @@ void Error_Handler(void);
 void RXCallback(void);
 /* USER CODE BEGIN EFP */
 
-/* USER CODE END EFP */
-
-/* Private defines -----------------------------------------------------------*/
-/* USER CODE BEGIN Private defines */
-/* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
-
-I2C_HandleTypeDef hi2c2;
-
-SPI_HandleTypeDef hspi2;
-
-UART_HandleTypeDef huart2;
-
-/* USER CODE END Private defines */
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __MAIN_H */
 

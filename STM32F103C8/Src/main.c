@@ -45,7 +45,7 @@
 
 
 /* USER CODE BEGIN PV */
-uint8_t data;
+uint8_t data = 255;
 uint8_t ReceiveFlag = FALSE;
 /* USER CODE END PV */
 
@@ -107,6 +107,9 @@ int main(void)
 
   while (1)
   {
+	  HAL_UART_Transmit_IT(&huart2, &data, 1);
+	  HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
+	  HAL_Delay(500);
 	  if(ReceiveFlag)
 	  {
 		  ReceiveFlag = FALSE;
