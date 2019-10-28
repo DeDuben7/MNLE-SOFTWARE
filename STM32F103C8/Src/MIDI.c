@@ -20,26 +20,8 @@ int err = 0; // error variabele
 
 void MIDI_PROC(uint8_t MIDI_MSG)
 {
-	if(MIDI_MSG & 128)
-	{
-		MIDI_CHANNEL = (char)(MIDI_MSG & 0x0F); // lsb bits van byte omzetten in nibble
-		MIDI_FUNC = (char)((MIDI_MSG & 0xF0)>>4); // msb bits van byte omzetten in nibble
-	}
-
-	else if(!(MIDI_MSG & 128))
-	{
-		FUNC_VAR[i++] = MIDI_MSG;
-	}
-
-	if(MIDI_FUNC == PROG_CHANGE && i == 1)
-	{
-		//err = YM_PROG_CHANGE(MIDI_CHANNEL,FUNC_VAR[0]);
-		i = 0;
-	}
-
 	if(i == 2)
 	{
-
 		switch(MIDI_FUNC) // switch om data naar goeie YM functie te sturen
 		{
 			case PITCH:
@@ -69,4 +51,25 @@ void MIDI_PROC(uint8_t MIDI_MSG)
 				return;
 		}
 	}
+
+	if(MIDI_MSG & 128)
+	{
+		MIDI_CHANNEL = (char)(MIDI_MSG & 0x0F); // lsb bits van byte omzetten in nibble
+		MIDI_FUNC = (char)((MIDI_MSG & 0xF0)>>4); // msb bits van byte omzetten in nibble
+		return;
+	}
+
+	else if(!(MIDI_MSG & 128))
+	{
+		FUNC_VAR[i++] = MIDI_MSG;
+	}
+
+	if(MIDI_FUNC == PROG_CHANGE && i == 1)
+	{
+		//err = YM_PROG_CHANGE(MIDI_CHANNEL,FUNC_VAR[0]);
+		i = 0;
+		return;
+	}
+
+
 }
