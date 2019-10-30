@@ -80,7 +80,7 @@ typedef struct
 	uint8_t Waveform;
 	uint8_t AM;
 	uint8_t Vibrato;
-	uint8_t Sustain;
+	uint8_t Pedal_Sustain;
 	uint8_t ModFreqMult;
 	uint8_t Volume;
 	uint8_t Attack;
@@ -95,11 +95,11 @@ typedef struct
 typedef struct
 {
 	uint8_t Enable;
-	uint8_t F_Numb;
+	int 	F_Numb;
 	uint8_t Octave;
 	uint8_t Velocity;
 
-}*pVCH;
+}pVCH;
 
 /* Struct om data op te slaan per chip channel -------------------------------*/
 typedef struct
@@ -113,7 +113,7 @@ typedef struct
 	Operator OP2;
 }*pCCH;
 
-extern pVCH VCH[9];
+
 extern pCCH CCH[4];
 
 

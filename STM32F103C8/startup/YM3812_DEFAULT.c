@@ -24,8 +24,8 @@ void YM_SET_Def()
 	YM_WRITE_Databus(1,1,0xF0);
 	YM_WRITE_Databus(1,0,0x80);
 	YM_WRITE_Databus(1,1,0x77);
-	YM_WRITE_Databus(1,0,0xA0);
-	YM_WRITE_Databus(1,1,0x98);
+	//YM_WRITE_Databus(1,0,0xA0);
+	//YM_WRITE_Databus(1,1,0x98);
 
 	YM_WRITE_Databus(1,0,0x23);
 	YM_WRITE_Databus(1,1,0x01);
@@ -35,8 +35,8 @@ void YM_SET_Def()
 	YM_WRITE_Databus(1,1,0xF0);
 	YM_WRITE_Databus(1,0,0x83);
 	YM_WRITE_Databus(1,1,0x77);
-	YM_WRITE_Databus(1,0,0xB0);
-	YM_WRITE_Databus(1,1,0x31);
+	//YM_WRITE_Databus(1,0,0xB0);
+	//YM_WRITE_Databus(1,1,0x31);
 
 }
 

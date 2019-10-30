@@ -20,6 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <includes.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -107,20 +108,38 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
 
+  YM_SET_Def();
+  HAL_Delay(200);
+  YM_SET_Def_OFF();
+  HAL_Delay(200);
+
   HAL_UART_Receive_IT(&huart2, &data, 1);
 //  YM_RESET();
 
 //  HAL_UART_Transmit_IT(&huart2,"ben in functie",15);
-  uint8_t datb = 128;
+//  uint8_t datb = 128;
 
 
   while (1)
   {
+	  YM_NOTE_ON(0,50,1);
+	  HAL_Delay(500);
+	  YM_NOTE_ON(0,52,1);
+	  HAL_Delay(500);
+	  YM_NOTE_ON(0,54,1);
+	  HAL_Delay(500);
+	  YM_NOTE_ON(0,50,1);
+	  HAL_Delay(500);
+	  YM_NOTE_ON(0,50,1);
+	  HAL_Delay(500);
+	  YM_NOTE_ON(0,52,1);
+	  HAL_Delay(500);
+	  YM_NOTE_ON(0,54,1);
+	  HAL_Delay(500);
+	  YM_NOTE_ON(0,50,1);
+	  HAL_Delay(500);
 
-	  YM_SET_Def();
-	  HAL_Delay(200);
-	  YM_SET_Def_OFF();
-	  HAL_Delay(200);
+
 	  /*
 
 	  if(ReceiveFlag)
