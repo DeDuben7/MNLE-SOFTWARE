@@ -116,20 +116,13 @@ int main(void)
 
   while (1)
   {
-<<<<<<< HEAD
-//	  HAL_UART_Transmit_IT(&huart2,&datb,1);
-//	  HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
 
 	  YM_SET_Def();
 	  HAL_Delay(200);
 	  YM_SET_Def_OFF();
 	  HAL_Delay(200);
 	  /*
-=======
-	  HAL_UART_Transmit_IT(&huart2, &data, 1);
-	  HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
-	  HAL_Delay(500);
->>>>>>> f4a785b284f1f2546d5c9ddb6d42c29c97522663
+
 	  if(ReceiveFlag)
 	  {
 		  ReceiveFlag = FALSE;
