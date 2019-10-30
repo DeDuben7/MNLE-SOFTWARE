@@ -60,7 +60,7 @@ void MIDI_PROC(uint8_t MIDI_DATA[2],uint8_t buflen)
 			{
 				case NOTE_OFF:
 					//err = YM_NOTE_ON(MIDI_CHANNEL,FUNC_VAR[0],0);
-					//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+					HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 					//HAL_UART_Transmit(&huart2, "noteoff", 7, 100);
 					break;
 				case NOTE_ON:

@@ -20,7 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <includes.h>
+#include "includes.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -122,33 +122,12 @@ int main(void)
 
   while (1)
   {
-	  YM_NOTE_ON(0,50,1);
-	  HAL_Delay(500);
-	  YM_NOTE_ON(0,52,1);
-	  HAL_Delay(500);
-	  YM_NOTE_ON(0,54,1);
-	  HAL_Delay(500);
-	  YM_NOTE_ON(0,50,1);
-	  HAL_Delay(500);
-	  YM_NOTE_ON(0,50,1);
-	  HAL_Delay(500);
-	  YM_NOTE_ON(0,52,1);
-	  HAL_Delay(500);
-	  YM_NOTE_ON(0,54,1);
-	  HAL_Delay(500);
-	  YM_NOTE_ON(0,50,1);
-	  HAL_Delay(500);
-
-
-	  /*
-
 	  if(ReceiveFlag)
 	  {
 		  ReceiveFlag = FALSE;
 		  HAL_UART_Receive_IT(&huart2, &data, 1);
-		  //MIDI_PROC(data);
+		  MIDI_PROC(data);
 	  }
-	  */
   }
 }
 
