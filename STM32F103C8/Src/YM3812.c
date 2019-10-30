@@ -54,8 +54,8 @@ uint8_t YM_WriteBits(uint8_t data)
 {
 	uint8_t iError = 0;
 
-	HAL_GPIO_WritePin(GPIOA,D0,(data & 1));
-	HAL_GPIO_WritePin(GPIOA,D1,(data & 2));
+	HAL_GPIO_WritePin(GPIOC,D0,(data & 1));
+	HAL_GPIO_WritePin(GPIOC,D1,(data & 2));
 	HAL_GPIO_WritePin(GPIOA,D2,(data & 4));
 	HAL_GPIO_WritePin(GPIOB,D3,(data & 8));
 	HAL_GPIO_WritePin(GPIOB,D4,(data & 16));
