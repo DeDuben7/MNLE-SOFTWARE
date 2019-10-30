@@ -1,3 +1,4 @@
+
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -44,13 +45,7 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-ADC_HandleTypeDef hadc1;
 
-I2C_HandleTypeDef hi2c2;
-
-SPI_HandleTypeDef hspi2;
-
-UART_HandleTypeDef huart2;
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
@@ -81,6 +76,50 @@ UART_HandleTypeDef huart2;
 #ifdef __cplusplus
 }
 #endif
+
+/* Struct om data op te slaan per operator -----------------------------------*/
+
+typedef struct
+{
+	uint8_t Waveform;
+	uint8_t AM;
+	uint8_t Vibrato;
+	uint8_t Sustain;
+	uint8_t ModFreqMult;
+	uint8_t Volume;
+	uint8_t Attack;
+	uint8_t Decay;
+	uint8_t Sustain;
+	uint8_t Release;
+	uint8_t KSR;
+	uint8_t ScalingLevel;
+}Operator;
+
+/* Struct om data op te slaan per voice channel ------------------------------*/
+typedef struct
+{
+	uint8_t Enable;
+	uint8_t F_Numb;
+	uint8_t Octave;
+	uint8_t Velocity;
+
+}*pVCH;
+
+/* Struct om data op te slaan per chip channel -------------------------------*/
+typedef struct
+{
+	uint8_t AM_Depth;
+	uint8_t Vib_Depth;
+	uint8_t Feedback;
+	uint8_t ModulatieMode;
+
+	Operator OP1;
+	Operator OP2;
+}*pCCH;
+
+extern pVCH VCH[9];
+extern pCCH CCH[4];
+
 
 #endif /* __MAIN_H */
 
