@@ -19,7 +19,7 @@ void YM_SET_Def()
 	YM_WRITE_Databus(1,0,0x20);
 	YM_WRITE_Databus(1,1,0x01);
 	YM_WRITE_Databus(1,0,0x40);
-	YM_WRITE_Databus(1,1,0x10);
+	YM_WRITE_Databus(1,1,0x00);
 	YM_WRITE_Databus(1,0,0x60);
 	YM_WRITE_Databus(1,1,0xF0);
 	YM_WRITE_Databus(1,0,0x80);

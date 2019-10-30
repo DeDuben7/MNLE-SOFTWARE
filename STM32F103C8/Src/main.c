@@ -120,15 +120,15 @@ int main(void)
 //  uint8_t datb = 128;
 
 
-  while (1)
-  {
-	  if(ReceiveFlag)
-	  {
-		  ReceiveFlag = FALSE;
-		  HAL_UART_Receive_IT(&huart2, &data, 1);
-		  MIDI_PROC(data);
-	  }
-  }
+	while (1)
+	{
+		if(ReceiveFlag)
+		{
+			ReceiveFlag = FALSE;
+			HAL_UART_Receive_IT(&huart2, &data, 1);
+			MIDI_PROC(data);
+		}
+	}
 }
 
 /**

@@ -5,80 +5,75 @@
 * Version       : V1.00
 * Programmer(s) : Julian Schotborgh
 *
-*  21-10-19 Opstart midi.c en maken midi_proc()
+*  24-10-19 Opstart midi.c en maken midi_proc() - JS
+*  25-10-19 Aanpassen functie op nieuw ontwerp. - JS
 *********************************************************************************************************
 */
 
 #include "includes.h"
 
+int i = 0;  //counter
+uint8_t FUNC_VAR[2]; // binnengekomen data voor de functies
+char MIDI_FUNC; // variabele om fucntie nibble op te slaan
+char MIDI_CHANNEL; // variabele om channel nibble op te slaan
+int err = 0; // error variabele
 
-void MIDI_PROC(uint8_t MIDI_DATA[2],uint8_t buflen)
+void MIDI_PROC(uint8_t MIDI_MSG)
 {
-	uint8_t MIDI_STATUS; // binnengekomen status byte
-	uint8_t FUNC_VAR[1]; // binnengekomen data voor de functies
-	char MIDI_FUNC; // variabele om fucntie nibble op te slaan
-	char MIDI_CHANNEL; // variabele om channel nibble op te slaan
-	int err = 0; // error variabele
 
-
-
-	switch (buflen)
+	if(MIDI_MSG & 128)
 	{
-		case 2:
-			MIDI_STATUS = MIDI_DATA[0];
-			MIDI_FUNC = (char)(MIDI_STATUS & 0x0F); // lsb bits van byte omzetten in nibble
-			MIDI_CHANNEL = (char)((MIDI_STATUS & 0x0F)>>4); // msb bits van byte omzetten in nibble
+		MIDI_CHANNEL = (char)(MIDI_MSG & 0x0F); // lsb bits van byte omzetten in nibble
+		MIDI_FUNC = (char)((MIDI_MSG & 0xF0)>>4); // msb bits van byte omzetten in nibble
+		return;
+	}
 
-			for (int i=0;i<1;i++) // data halen uit binnengekomen bericht
-			{
-				FUNC_VAR[i] = MIDI_DATA[i+1];
-			}
+	if(!(MIDI_MSG & 128))
+	{
+		FUNC_VAR[i++] = MIDI_MSG;
+	}
 
-			switch(MIDI_FUNC) // switch om data naar goeie YM functie te sturen
-			{
-				case PROG_CHANGE:
-					//err = YM_PROG_CHANGE(MIDI_CHANNEL,FUNC_VAR[0]);
-					break;
-				case PITCH:
-					//err = YM_PITCH(MIDI_CHANNEL,FUNC_VAR[1]);
-					break;
-			}
+	if(MIDI_FUNC == PROG_CHANGE && i == 1)
+	{
+		//err = YM_PROG_CHANGE(MIDI_CHANNEL,FUNC_VAR[0]);
+		i = 0;
+		return;
+	}
 
-			break;
-		case 3:
-
-			MIDI_STATUS = MIDI_DATA[0];
-			MIDI_FUNC = (char)((MIDI_STATUS & 0xF0) >> 4); // lsb bits van byte omzetten in nibble
-			MIDI_CHANNEL = (char)(MIDI_STATUS & 0x0F); // msb bits van byte omzetten in nibble
-
-			for (int i=0;i<2;i++) // data halen uit binnengekomen bericht
-			{
-				FUNC_VAR[i] = MIDI_DATA[i+1];
-			}
-
-			switch(MIDI_FUNC) // switch om data naar goeie YM functie te sturen
-			{
-				case NOTE_OFF:
-					//err = YM_NOTE_ON(MIDI_CHANNEL,FUNC_VAR[0],0);
-					HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-					//HAL_UART_Transmit(&huart2, "noteoff", 7, 100);
-					break;
-				case NOTE_ON:
-//					err = YM_NOTE_ON(MIDI_CHANNEL,FUNC_VAR[0],FUNC_VAR[1]);
-					//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-					//HAL_UART_Transmit_IT(&huart2, "noteon", 6);
-					break;
-				case CONT_CHANGE:
-					//err = YM_CONT_CHANGE(MIDI_CHANNEL,FUNC_VAR[0],FUNC_VAR[1]);
-					//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-					//HAL_UART_Transmit(&huart2, "cont", 4, 100);
-					break;
-				default:
-					return;
-			}
-
-			break;
-		default:
-			return;
+	if(i == 2)
+	{
+		switch(MIDI_FUNC) // switch om data naar goeie YM functie te sturen
+		{
+			case PITCH:
+				//err = YM_PITCH(MIDI_CHANNEL,FUNC_VAR[1]);
+				i=0;
+				break;
+			case NOTE_OFF:
+				//err = YM_NOTE_ON(MIDI_CHANNEL,FUNC_VAR[0],0);
+				//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+				//HAL_UART_Transmit(&huart2, "noteoff", 7, 100);
+				FUNC_VAR[0] = 0;
+				FUNC_VAR[1] = 0;
+				i=0;
+				break;
+			case NOTE_ON:
+				HAL_UART_Transmit_IT(&huart2, &FUNC_VAR[0], 1);
+				err = YM_NOTE_ON(MIDI_CHANNEL,FUNC_VAR[0],FUNC_VAR[1]);
+				//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+				//HAL_UART_Transmit_IT(&huart2, "noteon", 6);
+				FUNC_VAR[0] = 0;
+				FUNC_VAR[1] = 0;
+				i=0;
+				break;
+			case CONT_CHANGE:
+				//err = YM_CONT_CHANGE(MIDI_CHANNEL,FUNC_VAR[0],FUNC_VAR[1]);
+				//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+				//HAL_UART_Transmit(&huart2, "cont", 4, 100);
+				i=0;
+				break;
+			default:
+				//err = NO_FUNC;
+				return;
+		}
 	}
 }

@@ -103,12 +103,26 @@ uint8_t YM_NOTE_ON(uint8_t MIDI_CHANNEL, uint8_t KEY_NUMBER, uint8_t VELOCITY)
 	VCH.F_Numb = F_Number[KEY_NUMBER % 12];
 	VCH.Octave = (KEY_NUMBER/12)-1;
 	VCH.Velocity = VELOCITY >> 1;
+
+//	uint8_t byte1 = VCH.F_Numb & 0xFF;
+//	uint8_t byte2 = VCH.Octave;
+	uint8_t byte3 = KEY_NUMBER;
+//	uint8_t byte4 = (0x20 | (VCH.Octave << 2)) | (((VCH.F_Numb & 0x300) >> 8));
+//	HAL_UART_Transmit_IT(&huart2, &byte1, 1);
+//	HAL_Delay(50);
+//	HAL_UART_Transmit_IT(&huart2, &byte2, 1);
+//	HAL_Delay(50);
+//	HAL_UART_Transmit_IT(&huart2, &byte3, 1);
+//	HAL_Delay(50);
+//	HAL_UART_Transmit_IT(&huart2, &byte4, 1);
+//	HAL_Delay(50);
+
 	YM_WRITE_Databus(1,0,0xB0);
 	YM_WRITE_Databus(1,1,0x00);
 	YM_WRITE_Databus(1,0,0xA0);
 	YM_WRITE_Databus(1,1,VCH.F_Numb & 0xFF);
 	YM_WRITE_Databus(1,0,0xB0);
-	YM_WRITE_Databus(1,1,(0x20 & (VCH.Octave << 2)) & (((VCH.F_Numb & 0x300) >> 8)));
+	YM_WRITE_Databus(1,1,(0x20 | (VCH.Octave << 2)) | ((VCH.F_Numb & 0x300) >> 8));
 
 	return iError;
 }
