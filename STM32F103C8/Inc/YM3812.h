@@ -11,8 +11,8 @@
 #include "includes.h"
 
 
-#define A0 	GPIO_PIN_8 		//GPIOB
-#define WR 	GPIO_PIN_9 		//GPIOB
+#define A0 	GPIO_PIN_10		//GPIOA - 10 a
+#define WR 	GPIO_PIN_9 		//GPIOA - 9 a
 #define RST GPIO_PIN_8 		//GPIOA
 #define CS1 GPIO_PIN_12 	//GPIOA
 //#define CS2 GPIO_PIN_11 	//GPIOA
@@ -20,9 +20,9 @@
 //#define CS4 GPIO_PIN_9 		//GPIOA
 //#define D0 	GPIO_PIN_13 	//GPIOA - Voor nu GPIOC
 //#define D1 	GPIO_PIN_14 	//GPIOA - Voor nu GPIOC
-#define D0 	GPIO_PIN_10		//GPIOA
-#define D1 	GPIO_PIN_9		//GPIOA
-#define D2 	GPIO_PIN_15 	//GPIOA
+#define D0 	GPIO_PIN_8		//GPIOB - 8 b
+#define D1 	GPIO_PIN_9		//GPIOB - 9 b
+#define D2 	GPIO_PIN_12 	//GPIOB - 12 b
 #define D3 	GPIO_PIN_3 		//GPIOB
 #define D4 	GPIO_PIN_4 		//GPIOB
 #define D5 	GPIO_PIN_5 		//GPIOB

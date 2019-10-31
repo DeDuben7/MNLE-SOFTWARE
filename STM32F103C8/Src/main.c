@@ -105,6 +105,7 @@ int main(void)
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, RESET);
   HAL_Delay(1);
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, SET);
+  HAL_Delay(1);
 
   /* USER CODE BEGIN 2 */
 
@@ -119,13 +120,12 @@ int main(void)
 //  HAL_UART_Transmit_IT(&huart2,"ben in functie",15);
 //  uint8_t datb = 128;
 
-
 	while (1)
 	{
+
 		if(ReceiveFlag)
 		{
 			ReceiveFlag = FALSE;
-			HAL_UART_Receive_IT(&huart2, &data, 1);
 			MIDI_PROC(data);
 		}
 	}
@@ -145,6 +145,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	if (huart->Instance == USART2)
 	{
 		ReceiveFlag = TRUE;
+		HAL_UART_Receive_IT(&huart2, &data, 1);
+//		 HAL_UART_Transmit_IT(&huart2, &data, 1);
 	}
 }
 /**
@@ -434,17 +436,17 @@ void GPIO_Init()
 	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-	//YM3812 PINS PART 1 PB2 and PB12 are still free
-	GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9;
+	//YM3812 PINS PART 1
+	GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_12;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 	//YM3812 PINS PART 2
 	GPIO_InitStruct.Pin = GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 

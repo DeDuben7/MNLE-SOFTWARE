@@ -46,3 +46,4 @@ void YM_SET_Def_OFF()
 	YM_WRITE_Databus(1,0,0xB0);
 	YM_WRITE_Databus(1,1,0x11);
 }
+
