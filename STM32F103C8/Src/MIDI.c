@@ -25,13 +25,22 @@ uint8_t NOTE_CONT_CHANGE_FLAG;
 
 int MIDI_PROC(uint8_t MIDI_MSG)
 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4c1d79d99e523132f4972867de6887098e9d0971
 	if(MIDI_MSG & 128)
 	{
 		i = 0;
 		DATA[0] = 0;
 		DATA[1] = 0;
+<<<<<<< HEAD
 
 		if((MIDI_MSG & 0xF0) == 144)
+=======
+		if((MIDI_MSG & 0xF0) == 144)
+		{
+>>>>>>> 4c1d79d99e523132f4972867de6887098e9d0971
 			NOTE_ON_FLAG = 1;
 
 		else if((MIDI_MSG & 0xF0) == 128)
