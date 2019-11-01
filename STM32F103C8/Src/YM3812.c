@@ -93,40 +93,50 @@ uint8_t YM_DEF_INIT()
 int F_Number[12] =
 {0x157,0x16B,0x181,0x198,0x1B0,0x1CA,0x1E5,0x202,0x220,0x241,0x263,0x287};
 
-pVCH VCH;
+pVCH VCH[9];
 
 uint8_t YM_NOTE_ON(uint8_t MIDI_CHANNEL, uint8_t KEY_NUMBER, uint8_t VELOCITY)
 {
-
 	uint8_t iError = 0;
+	int i;
 
-	VCH.F_Numb = F_Number[KEY_NUMBER % 12];
-	VCH.Octave = (KEY_NUMBER/12)-1;
-	VCH.Velocity = VELOCITY >> 1;
+	for(i=0;i<9;i++)
+	{
+		if(VCH[i].Enable == FALSE)
+		{
+			VCH[i].Enable = TRUE;
+			VCH[i].KEY_Numb = KEY_NUMBER;
+			VCH[i].F_Numb = F_Number[KEY_NUMBER % 12];
+			VCH[i].Octave = (KEY_NUMBER/12)-1;
+			VCH[i].Velocity = VELOCITY >> 1;
 
-//	uint8_t byte1 = VCH.F_Numb & 0xFF;
-//	uint8_t byte2 = VCH.Octave;
-	uint8_t byte3 = KEY_NUMBER;
-//	uint8_t byte4 = (0x20 | (VCH.Octave << 2)) | (((VCH.F_Numb & 0x300) >> 8));
-//	HAL_UART_Transmit_IT(&huart2, &byte1, 1);
-//	HAL_Delay(50);
-//	HAL_UART_Transmit_IT(&huart2, &byte2, 1);
-//	HAL_Delay(50);
-//	HAL_UART_Transmit_IT(&huart2, &byte3, 1);
-//	HAL_Delay(50);
-//	HAL_UART_Transmit_IT(&huart2, &byte4, 1);
-//	HAL_Delay(50);
-
-	YM_WRITE_Databus(1,0,0xB0);
-	YM_WRITE_Databus(1,1,0x00);
-	YM_WRITE_Databus(1,0,0xA0);
-	YM_WRITE_Databus(1,1,VCH.F_Numb & 0xFF);
-	YM_WRITE_Databus(1,0,0xB0);
-	YM_WRITE_Databus(1,1,(0x20 | (VCH.Octave << 2)) | ((VCH.F_Numb & 0x300) >> 8));
+			YM_WRITE_Databus(1,0,0xA0+i);
+			YM_WRITE_Databus(1,1,VCH[i].F_Numb & 0xFF);
+			YM_WRITE_Databus(1,0,0xB0+i);
+			YM_WRITE_Databus(1,1,(0x20 | (VCH[i].Octave << 2)) | ((VCH[i].F_Numb & 0x300) >> 8));
+		}
+	}
 
 	return iError;
 }
 
+uint8_t YM_NOTE_OFF(uint8_t KEY_NUMBER, uint8_t VELOCITY)
+{
+	uint8_t iError = 0;
+	int i;
+
+	for(i=0;i<9;i++)
+	{
+		if(VCH[i].KEY_Numb == KEY_NUMBER)
+		{
+			YM_WRITE_Databus(1,0,0xB0+i);
+			YM_WRITE_Databus(1,1,0x00);
+			VCH[i].Enable = FALSE;
+		}
+	}
+
+	return iError;
+}
 /*
 uint8_t YM_CONT_CHANGE(uint8_t data)
 {

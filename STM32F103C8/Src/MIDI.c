@@ -23,8 +23,9 @@ void MIDI_PROC(uint8_t MIDI_MSG)
 
 	if(MIDI_MSG & 128)
 	{
-		MIDI_CHANNEL = (char)(MIDI_MSG & 0x0F); // lsb bits van byte omzetten in nibble
-		MIDI_FUNC = (char)((MIDI_MSG & 0xF0)>>4); // msb bits van byte omzetten in nibble
+		MIDI_CHANNEL = MIDI_MSG & 0x0F; // lsb bits van byte omzetten in nibble
+		MIDI_FUNC = (MIDI_MSG & 0xF0)>>4; // msb bits van byte omzetten in nibble
+		i = 0;
 		return;
 	}
 

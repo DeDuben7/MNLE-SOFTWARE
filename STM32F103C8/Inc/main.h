@@ -95,6 +95,7 @@ typedef struct
 typedef struct
 {
 	uint8_t Enable;
+	uint8_t KEY_Numb;
 	int 	F_Numb;
 	uint8_t Octave;
 	uint8_t Velocity;
