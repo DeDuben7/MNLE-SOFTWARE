@@ -3,6 +3,7 @@
 uint8_t YM_WRITE_Databus(uint8_t chips, uint8_t addr_select, uint8_t data)
 {
 	uint8_t iError = 0;
+	uint8_t i;
 
 	if (chips & 1)
 	{
@@ -16,9 +17,12 @@ uint8_t YM_WRITE_Databus(uint8_t chips, uint8_t addr_select, uint8_t data)
 //		HAL_GPIO_WritePin(GPIOA,CS1,GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOA,WR,GPIO_PIN_RESET);
 		YM_WriteBits(data);
-		HAL_Delay(1);
+		for(i=0; i<0x50; i++){}
+//		HAL_Delay(1);
 //		HAL_GPIO_WritePin(GPIOA,CS1,GPIO_PIN_SET);
 		HAL_GPIO_WritePin(GPIOA,WR,GPIO_PIN_SET);
+		for(i=0; i<0x50; i++){}
+
 	}
 	/*else if (chips & 2)
 	{
@@ -61,12 +65,14 @@ uint8_t YM_WriteBits(uint8_t data)
 //	for(i=0; i<8; i++){
 //		if(data & (1<<i))
 //		{
-//			wdata |= (1 << i);
+//			wdata |= (D0 << i);
 //		}
 //	wrdata = wdata;
 //	}
-//	HAL_UART_Transmit_IT(&huart2, &wrdata, 2);
+//	GPIOB->BSRR = wrdata | (~wrdata << 16U);
+//	wdata = 0;
 
+//
 	if(data & 1) {
 		wridata |= D0;
 	}
@@ -92,18 +98,8 @@ uint8_t YM_WriteBits(uint8_t data)
 		wridata |= D7;
 	}
 
-	HAL_UART_Transmit_IT(&huart2, &wridata, 2);
-	HAL_GPIO_WritePin(GPIOA,wridata,1);
-//	wrdata = 0;
+	GPIOB->BSRR = wridata | (~wridata << 16U);
 	wridata = 0;
-//	HAL_GPIO_WritePin(GPIOB,D0,(data & 1));
-//	HAL_GPIO_WritePin(GPIOB,D1,(data & 2));
-//	HAL_GPIO_WritePin(GPIOB,D2,(data & 4));
-//	HAL_GPIO_WritePin(GPIOB,D3,(data & 8));
-//	HAL_GPIO_WritePin(GPIOB,D4,(data & 16));
-//	HAL_GPIO_WritePin(GPIOB,D5,(data & 32));
-//	HAL_GPIO_WritePin(GPIOB,D6,(data & 64));
-//	HAL_GPIO_WritePin(GPIOB,D7,(data & 128));
 
 	return iError;
 }

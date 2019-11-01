@@ -26,7 +26,6 @@ uint8_t NOTE_CONT_CHANGE_FLAG;
 int MIDI_PROC(uint8_t MIDI_MSG)
 {
 
-
 	if(MIDI_MSG & 128)
 	{
 		i = 0;
@@ -34,7 +33,6 @@ int MIDI_PROC(uint8_t MIDI_MSG)
 		DATA[1] = 0;
 		if((MIDI_MSG & 0xF0) == 144)
 		{
-
 			NOTE_ON_FLAG = 1;
 		}
 		else if((MIDI_MSG & 0xF0) == 128)
