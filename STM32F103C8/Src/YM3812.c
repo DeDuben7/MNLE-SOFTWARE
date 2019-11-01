@@ -59,30 +59,8 @@ uint8_t YM_WRITE_Databus(uint8_t chips, uint8_t addr_select, uint8_t data)
 uint8_t YM_WriteBits(uint8_t data)
 {
 	uint8_t iError = 0;
-<<<<<<< HEAD
+	uint16_t wridata;
 
-	HAL_GPIO_WritePin(GPIOB,D0,(data & 1));
-	HAL_GPIO_WritePin(GPIOB,D1,(data & 2));
-	HAL_GPIO_WritePin(GPIOB,D2,(data & 4));
-	HAL_GPIO_WritePin(GPIOB,D3,(data & 8));
-	HAL_GPIO_WritePin(GPIOB,D4,(data & 16));
-	HAL_GPIO_WritePin(GPIOB,D5,(data & 32));
-	HAL_GPIO_WritePin(GPIOB,D6,(data & 64));
-	HAL_GPIO_WritePin(GPIOB,D7,(data & 128));
-=======
-	uint8_t i;
-
-//	for(i=0; i<8; i++){
-//		if(data & (1<<i))
-//		{
-//			wdata |= (D0 << i);
-//		}
-//	wrdata = wdata;
-//	}
-//	GPIOB->BSRR = wrdata | (~wrdata << 16U);
-//	wdata = 0;
-
-//
 	if(data & 1) {
 		wridata |= D0;
 	}
@@ -110,7 +88,6 @@ uint8_t YM_WriteBits(uint8_t data)
 
 	GPIOB->BSRR = wridata | (~wridata << 16U);
 	wridata = 0;
->>>>>>> 4c1d79d99e523132f4972867de6887098e9d0971
 
 	return iError;
 }
