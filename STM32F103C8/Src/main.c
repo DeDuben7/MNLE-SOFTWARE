@@ -111,8 +111,6 @@ int main(void)
 
   YM_SET_Def();
   HAL_Delay(200);
-  YM_SET_Def_OFF();
-  HAL_Delay(200);
 
   HAL_UART_Receive_IT(&huart2, &data, 1);
 //  YM_RESET();
