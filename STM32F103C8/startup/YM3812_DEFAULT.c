@@ -4,8 +4,6 @@ void YM_RESET()
 {
 	int i;
 
-
-
 	for(i=1; i< 0xF6; i++)
 	{
 		YM_WRITE_Databus(1,0,i);

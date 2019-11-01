@@ -31,6 +31,8 @@
 
 uint8_t YM_WRITE_Databus(uint8_t chips, uint8_t addr_select, uint8_t data);
 uint8_t YM_WriteBits(uint8_t data);
+uint8_t YM_NOTE_ON(uint8_t MIDI_CHANNEL, uint8_t KEY_NUMBER, uint8_t VELOCITY);
+uint8_t YM_NOTE_OFF(uint8_t KEY_NUMBER, uint8_t VELOCITY);
 
 /* Frequency array om het F-number te genereren.
 F Number	Frequency
