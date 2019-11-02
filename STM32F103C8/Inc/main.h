@@ -67,6 +67,7 @@ I2C_HandleTypeDef hi2c2;
 SPI_HandleTypeDef hspi2;
 
 UART_HandleTypeDef huart2;
+
 typedef struct
 {
 	uint8_t Waveform;
@@ -88,9 +89,10 @@ typedef struct
 {
 	uint8_t Enable;
 	uint8_t KEY_Numb;
-	int 	F_Numb;
+	uint16_t F_Numb;
 	uint8_t Octave;
 	uint8_t Velocity;
+	uint8_t i_tel;
 
 }pVCH;
 

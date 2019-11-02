@@ -21,10 +21,11 @@ void YM_SET_Def()
 
 	for(i=0;i<9;i++)
 	{
+
 		YM_WRITE_Databus(1,0,0x20 + op1[i]);
 		YM_WRITE_Databus(1,1,0x01);
 		YM_WRITE_Databus(1,0,0x40 + op1[i]);
-		YM_WRITE_Databus(1,1,0x00);
+		YM_WRITE_Databus(1,1,0x10);
 		YM_WRITE_Databus(1,0,0x60 + op1[i]);
 		YM_WRITE_Databus(1,1,0xF0);
 		YM_WRITE_Databus(1,0,0x80 + op1[i]);
@@ -33,11 +34,12 @@ void YM_SET_Def()
 		YM_WRITE_Databus(1,0,0x20 + op2[i]);
 		YM_WRITE_Databus(1,1,0x01);
 		YM_WRITE_Databus(1,0,0x40 + op2[i]);
-		YM_WRITE_Databus(1,1,0x00);
+		YM_WRITE_Databus(1,1,0x01);
 		YM_WRITE_Databus(1,0,0x60 + op2[i]);
 		YM_WRITE_Databus(1,1,0xF0);
 		YM_WRITE_Databus(1,0,0x80 + op2[i]);
 		YM_WRITE_Databus(1,1,0x77);
+
 	}
 }
 

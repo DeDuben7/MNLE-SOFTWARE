@@ -121,6 +121,51 @@ int main(void)
 
   HAL_UART_Receive_IT(&huart2, &data, 1);
 
+
+//
+//	YM_WRITE_Databus(1,0,0xA0);
+//	YM_WRITE_Databus(1,1,0x57);
+//	YM_WRITE_Databus(1,0,0xB0);
+//	YM_WRITE_Databus(1,1,0x31);
+//
+//	HAL_Delay(1000);
+//
+//	YM_WRITE_Databus(1,0,0xA1);
+//	YM_WRITE_Databus(1,1,0x6B);
+//	YM_WRITE_Databus(1,0,0xB1);
+//	YM_WRITE_Databus(1,1,0x31);
+//
+//	HAL_Delay(1000);
+//
+//	YM_WRITE_Databus(1,0,0xA2);
+//	YM_WRITE_Databus(1,1,0x81);
+//	YM_WRITE_Databus(1,0,0xB2);
+//	YM_WRITE_Databus(1,1,0x31);
+//
+//
+//
+//	HAL_Delay(1000);
+//
+//	YM_WRITE_Databus(1,0,0xA2);
+//	YM_WRITE_Databus(1,1,0x81);
+//	YM_WRITE_Databus(1,0,0xB2);
+//	YM_WRITE_Databus(1,1,0x11);
+//
+//	HAL_Delay(1000);
+//
+//	YM_WRITE_Databus(1,0,0xA1);
+//	YM_WRITE_Databus(1,1,0x6B);
+//	YM_WRITE_Databus(1,0,0xB1);
+//	YM_WRITE_Databus(1,1,0x11);
+//
+//	HAL_Delay(5000);
+//
+//	YM_WRITE_Databus(1,0,0xA0);
+//	YM_WRITE_Databus(1,1,0x57);
+//	YM_WRITE_Databus(1,0,0xB0);
+//	YM_WRITE_Databus(1,1,0x11);
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -471,7 +516,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	{
 		ReceiveFlag = TRUE;
 		HAL_UART_Receive_IT(&huart2, &data, 1);
-		 HAL_UART_Transmit_IT(&huart2, &data, 1);
+//		HAL_UART_Transmit_IT(&huart2, &data, 1);
 	}
 }
 /* USER CODE END 4 */

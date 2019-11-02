@@ -23,8 +23,10 @@ uint8_t NOTE_OFF_FLAG;
 uint8_t NOTE_PROG_CHANGE_FLAG;
 uint8_t NOTE_CONT_CHANGE_FLAG;
 
-int MIDI_PROC(uint8_t MIDI_MSG)
+uint8_t MIDI_PROC(uint8_t MIDI_MSG)
 {
+	uint8_t err;
+
 	if(MIDI_MSG & 128)
 	{
 		i = 0;
@@ -53,8 +55,9 @@ int MIDI_PROC(uint8_t MIDI_MSG)
 
 			if(i==2)
 			{
-				HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-				YM_NOTE_ON(0,DATA[0],DATA[1]);
+//				HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+//				YM_NOTE_ON(0,DATA[0],DATA[1]);
+				YM_NOTE_ON_OFF(0,DATA[0],DATA[1], ON);
 				NOTE_ON_FLAG = 0;
 			}
 			return err;
@@ -66,7 +69,8 @@ int MIDI_PROC(uint8_t MIDI_MSG)
 			DATA[i++] = MIDI_MSG;
 			if(i==2)
 			{
-				YM_NOTE_OFF(DATA[0],DATA[1]);
+//				YM_NOTE_OFF(DATA[0],DATA[1]);
+				YM_NOTE_ON_OFF(0,DATA[0],DATA[1], OFF);
 				NOTE_OFF_FLAG = 0;
 			}
 			return err;
@@ -96,6 +100,7 @@ int MIDI_PROC(uint8_t MIDI_MSG)
 			return err;
 		}
 	}
+	return err;
 }
 
 
