@@ -55,9 +55,9 @@ uint8_t MIDI_PROC(uint8_t MIDI_MSG)
 
 			if(i==2)
 			{
-//				HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-//				YM_NOTE_ON(0,DATA[0],DATA[1]);
-				YM_NOTE_ON_OFF(0,DATA[0],DATA[1], ON);
+				HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+				YM_NOTE_ON(0,DATA[0],DATA[1]);
+//				YM_NOTE_ON_OFF(0,DATA[0],DATA[1], ON);
 				NOTE_ON_FLAG = 0;
 			}
 			return err;
@@ -69,8 +69,8 @@ uint8_t MIDI_PROC(uint8_t MIDI_MSG)
 			DATA[i++] = MIDI_MSG;
 			if(i==2)
 			{
-//				YM_NOTE_OFF(DATA[0],DATA[1]);
-				YM_NOTE_ON_OFF(0,DATA[0],DATA[1], OFF);
+				YM_NOTE_OFF(DATA[0],DATA[1]);
+//				YM_NOTE_ON_OFF(0,DATA[0],DATA[1], OFF);
 				NOTE_OFF_FLAG = 0;
 			}
 			return err;
