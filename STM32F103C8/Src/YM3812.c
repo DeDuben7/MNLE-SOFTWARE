@@ -1,6 +1,6 @@
 #include "includes.h"
 
-uint8_t YM_WRITE_Databus(uint8_t chips, uint8_t addr_select, uint8_t data)
+uint8_t YM_WRITE_Databus(uint8_t chips, uint8_t addr_select, uint8_t address, uint8_t data)
 {
 	uint8_t iError = 0;
 	uint8_t i;
@@ -9,17 +9,28 @@ uint8_t YM_WRITE_Databus(uint8_t chips, uint8_t addr_select, uint8_t data)
 	{
 
 		HAL_GPIO_WritePin(GPIOA,A0,addr_select);
-		for(i=0; i<0x07; i++);							//0x05
-//		HAL_GPIO_WritePin(GPIOA,CS1,GPIO_PIN_RESET);
+		YM_WriteBits(address);
 		HAL_GPIO_WritePin(GPIOA,WR,GPIO_PIN_RESET);
+		for(i=0; i<0x06; i++);							//0x05   1us
+		HAL_GPIO_WritePin(GPIOA,WR,GPIO_PIN_SET);
+		for(i=0; i<0x22; i++);							//0x05   4us
+		HAL_GPIO_WritePin(GPIOA,A0,GPIO_PIN_SET);
 		YM_WriteBits(data);
-		for(i=0; i<0x50; i++);							//0x50
+		HAL_GPIO_WritePin(GPIOA,WR,GPIO_PIN_RESET);
+		for(i=0; i<0x06; i++);							//0x05   1us
+		HAL_GPIO_WritePin(GPIOA,WR,GPIO_PIN_SET);
+		for(i=0; i<0xDD; i++);							//0x05   23us
+
+
+
+//		HAL_GPIO_WritePin(GPIOA,CS1,GPIO_PIN_RESET);
+//		for(i=0; i<0x50; i++);							//0x50
 //		HAL_Delay(1);
 //		HAL_GPIO_WritePin(GPIOA,CS1,GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOA,WR,GPIO_PIN_SET);
-		for(i=0; i<0x07; i++);
-		HAL_GPIO_WritePin(GPIOA,A0,!addr_select);
-
+//		HAL_GPIO_WritePin(GPIOA,WR,GPIO_PIN_SET);
+//		for(i=0; i<0x07; i++);
+//		HAL_GPIO_WritePin(GPIOA,A0,!addr_select);
+//
 	}
 	/*else if (chips & 2)
 	{
@@ -152,10 +163,10 @@ uint8_t YM_NOTE_ON(uint8_t MIDI_CHANNEL, uint8_t KEY_NUMBER, uint8_t VELOCITY)
 			VCH[i].Velocity = VELOCITY >> 1;
 			VCH[i].i_tel  	= i;
 
-			YM_WRITE_Databus(1,0,0xA0+i);
-			YM_WRITE_Databus(1,1,VCH[i].F_Numb & 0xFF);
-			YM_WRITE_Databus(1,0,0xB0+i);
-			YM_WRITE_Databus(1,1,(0x20 | (VCH[i].Octave << 2)) | ((VCH[i].F_Numb & 0x300) >> 8));
+			YM_WRITE_Databus(1,0,0xA0+i,VCH[i].F_Numb & 0xFF);
+//			YM_WRITE_Databus(1,1,VCH[i].F_Numb & 0xFF);
+			YM_WRITE_Databus(1,0,0xB0+i,(0x20 | (VCH[i].Octave << 2)) | ((VCH[i].F_Numb & 0x300) >> 8));
+//			YM_WRITE_Databus(1,1,(0x20 | (VCH[i].Octave << 2)) | ((VCH[i].F_Numb & 0x300) >> 8));
 			return iError;
 		}
 	}
@@ -181,10 +192,10 @@ uint8_t YM_NOTE_OFF(uint8_t KEY_NUMBER, uint8_t VELOCITY)
 	{
 		if(VCH[i].KEY_Numb == KEY_NUMBER && VCH[i].Enable == TRUE)
 		{
-			YM_WRITE_Databus(1,0,0xA0+i);
-			YM_WRITE_Databus(1,1,0x00);
-			YM_WRITE_Databus(1,0,0xB0+i);
-			YM_WRITE_Databus(1,1,0x00);
+			YM_WRITE_Databus(1,0,0xA0+i,0);
+//			YM_WRITE_Databus(1,1,0x00);
+			YM_WRITE_Databus(1,0,0xB0+i,0);
+//			YM_WRITE_Databus(1,1,0x00);
 			VCH[i].KEY_Numb = 0;
 			VCH[i].Octave 	= 0;
 			VCH[i].Velocity = 0;

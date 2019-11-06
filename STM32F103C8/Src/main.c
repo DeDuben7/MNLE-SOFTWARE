@@ -174,7 +174,43 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		if(ReceiveFlag)
+//	  YM_WRITE_Databus(1,0,0xb0,0x31);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,1,0xb0,0x11);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,0,0xb1,0x31);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,1,0xb1,0x11);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,0,0xb2,0x31);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,1,0xb2,0x11);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,0,0xb3,0x31);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,1,0xb3,0x11);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,0,0xb4,0x31);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,1,0xb4,0x11);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,0,0xb5,0x31);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,1,0xb5,0x11);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,0,0xb6,0x31);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,1,0xb6,0x11);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,0,0xb7,0x31);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,1,0xb7,0x11);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,0,0xb8,0x31);
+//	  HAL_Delay(500);
+//	  YM_WRITE_Databus(1,1,0xb8,0x11);
+//	  HAL_Delay(500);
+	  if(ReceiveFlag)
 		{
 			ReceiveFlag = FALSE;
 			MIDI_PROC(data);
