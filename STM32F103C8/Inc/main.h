@@ -29,8 +29,6 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
-#include "stm32f1xx_hal_uart.h"
-#include "includes.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -60,7 +58,7 @@ UART_HandleTypeDef huart2;
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
-void RXCallback(void);
+
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */
