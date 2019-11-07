@@ -63,7 +63,7 @@
 /*#define HAL_SMARTCARD_MODULE_ENABLED   */
 #define HAL_SPI_MODULE_ENABLED
 /*#define HAL_SRAM_MODULE_ENABLED   */
-#define HAL_TIM_MODULE_ENABLED
+/*#define HAL_TIM_MODULE_ENABLED   */
 #define HAL_UART_MODULE_ENABLED
 /*#define HAL_USART_MODULE_ENABLED   */
 /*#define HAL_WWDG_MODULE_ENABLED   */
@@ -242,9 +242,9 @@
 #include "stm32f1xx_hal_gpio.h"
 #endif /* HAL_GPIO_MODULE_ENABLED */
 
-#ifdef HAL_EXTI_MODULE_ENABLED
+//#ifdef HAL_EXTI_MODULE_ENABLED
 //#include "stm32f1xx_hal_exti.h"
-#endif /* HAL_EXTI_MODULE_ENABLED */
+//#endif /* HAL_EXTI_MODULE_ENABLED */
 
 #ifdef HAL_DMA_MODULE_ENABLED
 #include "stm32f1xx_hal_dma.h"

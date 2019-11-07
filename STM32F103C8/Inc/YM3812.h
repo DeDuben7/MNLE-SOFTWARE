@@ -10,14 +10,13 @@
 
 #include "includes.h"
 
-
-#define A0 	GPIO_PIN_10		//GPIOA
-#define WR 	GPIO_PIN_9 		//GPIOA
-#define RST GPIO_PIN_8 		//GPIOA
-#define CS1 GPIO_PIN_12 	//GPIOA
-//#define CS2 GPIO_PIN_11 	//GPIOA
-//#define CS3 GPIO_PIN_10 	//GPIOA
-//#define CS4 GPIO_PIN_9 	//GPIOA
+#define RST 	GPIO_PIN_8 		//GPIOA
+#define A0 		GPIO_PIN_10		//GPIOA
+#define WR		GPIO_PIN_9		//GPIOA
+#define CS_1  	GPIO_PIN_11		//GPIOA
+#define CS_2 	GPIO_PIN_12 	//GPIOA
+//#define CS_3  				//GPIOA
+//#define CS_4 	GPIO_PIN_10 	//GPIOA
 
 #define D0 	GPIO_PIN_8		//GPIOB
 #define D1 	GPIO_PIN_9		//GPIOB
@@ -40,34 +39,11 @@
 #define ON 	1
 #define OFF 0
 
-uint8_t YM_WRITE_Databus(uint8_t chips, uint8_t addr_select, uint8_t adress, uint8_t data);
+uint8_t YM_WRITE_Databus(uint8_t chips, uint8_t adress, uint8_t data);
 uint8_t YM_WriteBits(uint8_t data);
-
-//uint8_t YM_NOTE_ON(uint8_t OCTAVE, uint16_t F_NUMBER, uint8_t VELOCITY, uint8_t i);
-//uint8_t YM_NOTE_OFF(uint8_t i);
-
 uint8_t YM_NOTE_ON(uint8_t MIDI_CHANNEL, uint8_t KEY_NUMBER, uint8_t VELOCITY);
 uint8_t YM_NOTE_OFF(uint8_t KEY_NUMBER, uint8_t VELOCITY);
-
-/* Frequency array om het F-number te genereren.
-F Number	Frequency
-			(decimal)	Note
-16B			277.2		C#
-181			293.7		D
-198			311.1		D#
-1B0			329.6		E
-1CA			349.2		F
-1E5			370.0		F#
-202			392.0		G
-220			415.3		G#
-241			440.0		A
-263			466.2		A#
-287			493.9		B
-2AE			523.3		C
-*/
-
-
-
-
+void YM_SET_Def();
+void YM_RESET();
 
 #endif /* YM3812_H_ */
