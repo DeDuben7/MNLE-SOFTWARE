@@ -1,21 +1,26 @@
 /* USER CODE BEGIN Header */
+/*
+* Filename      : main.c
+* Version       : V1.00
+* Programmers   : Schotburgh, Oehlers en van Renswoude
+*/
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+******************************************************************************
+* @file           : main.c
+* @brief          : Main program body
+******************************************************************************
+* @attention
+*
+* <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+* All rights reserved.</center></h2>
+*
+* This software component is licensed by ST under BSD 3-Clause license,
+* the "License"; You may not use this file except in compliance with the
+* License. You may obtain a copy of the License at:
+*                        opensource.org/licenses/BSD-3-Clause
+*
+******************************************************************************
+*/
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -51,8 +56,8 @@ SPI_HandleTypeDef hspi2;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-uint8_t data = 255;
 uint8_t ReceiveFlag = FALSE;
+uint8_t data;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -118,7 +123,7 @@ int main(void)
 	/* USER CODE BEGIN WHILE */
 	while (1)
 	{
-		if(ReceiveFlag)
+		if(ReceiveFlag) // if the receiveflag is set, reset the flag and call the MIDI_PROC function
 		{
 			ReceiveFlag = FALSE;
 			MIDI_PROC(data);
@@ -373,16 +378,16 @@ void GPIO_Init()
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	// ADC1_IN6
-//	GPIO_InitStruct.Pin = GPIO_PIN_6;
-//	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-//	GPIO_InitStruct.Pull = GPIO_PULLUP;
-//	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-//
-//	// ADC1_IN7
-//	GPIO_InitStruct.Pin = GPIO_PIN_7;
-//	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-//	GPIO_InitStruct.Pull = GPIO_NOPULL;
-//	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+	GPIO_InitStruct.Pin = GPIO_PIN_6;
+	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+	// ADC1_IN7
+	GPIO_InitStruct.Pin = GPIO_PIN_7;
+	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	// ADC1_IN8
 	GPIO_InitStruct.Pin = GPIO_PIN_0;
@@ -432,7 +437,7 @@ void GPIO_Init()
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 	//YM3812 PINS PART 2
-	GPIO_InitStruct.Pin = GPIO_PIN_6 |GPIO_PIN_7 |GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14;// | GPIO_PIN_15;
+	GPIO_InitStruct.Pin = GPIO_PIN_6 |GPIO_PIN_7 |GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_PULLUP;
@@ -452,18 +457,18 @@ void GPIO_Init()
   */
 void USART2_IRQHandler(void)
 {
-	HAL_UART_IRQHandler(&huart2);
+	HAL_UART_IRQHandler(&huart2); // calls the callback function
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if (huart->Instance == USART2)
 	{
-		ReceiveFlag = TRUE;
-		HAL_UART_Receive_IT(&huart2, &data, 1);
-//		HAL_UART_Transmit_IT(&huart2, &data, 1);
+		ReceiveFlag = TRUE;						// set the receiveflag
+		HAL_UART_Receive_IT(&huart2, &data, 1); // enable receive under interrupt mode again
 	}
 }
+
 /* USER CODE END 4 */
 
 /**

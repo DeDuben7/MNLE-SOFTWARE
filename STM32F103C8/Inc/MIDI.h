@@ -1,12 +1,7 @@
 /*
-*********************************************************************************************************
-*
 * Filename      : MIDI.h
 * Version       : V1.00
-* Programmer(s) : Julian Schotborgh
-*
-*  21-10-19 libs - defines - functies
-*********************************************************************************************************
+* Programmer(s) : Schotburgh, Oehlers en van Renswoude
 */
 
 /*
@@ -21,11 +16,11 @@
  * Defines
 *********************************************************************************************************
 */
-#define NOTE_ON 9
-#define NOTE_OFF 8
+#define NOTE_ON 	9
+#define NOTE_OFF 	8
 #define CONT_CHANGE 11
 #define PROG_CHANGE 12
-#define PITCH 14
+#define PITCH 		14
 
 
 
