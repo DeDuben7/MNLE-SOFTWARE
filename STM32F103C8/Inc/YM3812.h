@@ -1,9 +1,8 @@
 /*
- * YM3812.h
- *
- *  Created on: 25 okt. 2019
- *      Author: Ruben
- */
+* Filename      : YM3812.c
+* Version       : V1.00
+* Programmer(s) : Schotburgh, Oehlers en van Renswoude
+*/
 
 #ifndef YM3812_H_
 #define YM3812_H_
@@ -14,13 +13,13 @@
 #define RST 	GPIO_PIN_8 		//GPIOA
 #define A0 		GPIO_PIN_10		//GPIOA
 #define WR		GPIO_PIN_9		//GPIOA
-<<<<<<< HEAD
-#define CS_1  	GPIO_PIN_12		//GPIOA
-#define CS_2 	GPIO_PIN_11 	//GPIOA
-=======
+
+//#define CS_1  	GPIO_PIN_12		//GPIOA
+//#define CS_2 		GPIO_PIN_11 	//GPIOA
+
 #define CS_1  	GPIO_PIN_7		//GPIOA
 #define CS_2 	GPIO_PIN_6 		//GPIOA
->>>>>>> 6a5848d855a2d7df8eff915a741526f79e3e09b7
+
 //#define CS_3  				//GPIOA
 //#define CS_4 	 				//GPIOA
 
