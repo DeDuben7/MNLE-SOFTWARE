@@ -13,8 +13,8 @@
 #define RST 	GPIO_PIN_8 		//GPIOA
 #define A0 		GPIO_PIN_10		//GPIOA
 #define WR		GPIO_PIN_9		//GPIOA
-#define CS_1  	GPIO_PIN_11		//GPIOA
-#define CS_2 	GPIO_PIN_12 	//GPIOA
+#define CS_1  	GPIO_PIN_7		//GPIOA
+#define CS_2 	GPIO_PIN_6 	//GPIOA
 //#define CS_3  				//GPIOA
 //#define CS_4 	GPIO_PIN_10 	//GPIOA
 

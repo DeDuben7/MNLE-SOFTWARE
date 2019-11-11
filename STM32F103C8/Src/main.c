@@ -101,7 +101,7 @@ int main(void)
 
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
-	MX_ADC1_Init();
+	//MX_ADC1_Init();
 	MX_USART2_UART_Init();
 	MX_I2C2_Init();
 	MX_SPI2_Init();
@@ -373,16 +373,16 @@ void GPIO_Init()
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	// ADC1_IN6
-	GPIO_InitStruct.Pin = GPIO_PIN_6;
-	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-	// ADC1_IN7
-	GPIO_InitStruct.Pin = GPIO_PIN_7;
-	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+//	GPIO_InitStruct.Pin = GPIO_PIN_6;
+//	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+//	GPIO_InitStruct.Pull = GPIO_PULLUP;
+//	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+//
+//	// ADC1_IN7
+//	GPIO_InitStruct.Pin = GPIO_PIN_7;
+//	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+//	GPIO_InitStruct.Pull = GPIO_NOPULL;
+//	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	// ADC1_IN8
 	GPIO_InitStruct.Pin = GPIO_PIN_0;
@@ -432,7 +432,7 @@ void GPIO_Init()
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 	//YM3812 PINS PART 2
-	GPIO_InitStruct.Pin = GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14;// | GPIO_PIN_15;
+	GPIO_InitStruct.Pin = GPIO_PIN_6 |GPIO_PIN_7 |GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14;// | GPIO_PIN_15;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_PULLUP;
