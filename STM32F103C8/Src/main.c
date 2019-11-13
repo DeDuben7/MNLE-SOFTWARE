@@ -1,21 +1,26 @@
 /* USER CODE BEGIN Header */
+/*
+* Filename      : main.c
+* Version       : V1.00
+* Programmers   : Schotburgh, Oehlers en van Renswoude
+*/
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+******************************************************************************
+* @file           : main.c
+* @brief          : Main program body
+******************************************************************************
+* @attention
+*
+* <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+* All rights reserved.</center></h2>
+*
+* This software component is licensed by ST under BSD 3-Clause license,
+* the "License"; You may not use this file except in compliance with the
+* License. You may obtain a copy of the License at:
+*                        opensource.org/licenses/BSD-3-Clause
+*
+******************************************************************************
+*/
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -23,7 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "includes.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -42,23 +47,28 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+ADC_HandleTypeDef hadc1;
 
+I2C_HandleTypeDef hi2c2;
+
+SPI_HandleTypeDef hspi2;
+
+UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-uint8_t data;
 uint8_t ReceiveFlag = FALSE;
+uint8_t data;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void GPIO_Init(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_USART2_UART_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_SPI2_Init(void);
-static void MX_USART2_UART_Init(void);
-
 /* USER CODE BEGIN PFP */
+void GPIO_Init(void);
 
 /* USER CODE END PFP */
 
@@ -73,34 +83,28 @@ static void MX_USART2_UART_Init(void);
   */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
+	/* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
+	/* USER CODE END 1 */
 
-  /* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	/* MCU Configuration--------------------------------------------------------*/
 
-  /* USER CODE BEGIN Init */
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
 
-  /* USER CODE END Init */
+	/* USER CODE BEGIN Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
+	/* USER CODE END Init */
 
-  /* USER CODE BEGIN SysInit */
+	/* Configure the system clock */
+	SystemClock_Config();
 
-  /* USER CODE END SysInit */
+	/* USER CODE BEGIN SysInit */
 
-  /* Initialize all configured peripherals */
+	/* USER CODE END SysInit */
 
-  GPIO_Init();
-  MX_ADC1_Init();
-  MX_I2C2_Init();
-  MX_SPI2_Init();
-  MX_USART2_UART_Init();
-
+<<<<<<< HEAD
   /* USER CODE BEGIN 2 */
 
   HAL_UART_Receive_IT(&huart2, &data, 1);
@@ -135,6 +139,40 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		ReceiveFlag = TRUE;
 	}
 }
+=======
+	/* Initialize all configured peripherals */
+	MX_GPIO_Init();
+	//MX_ADC1_Init();
+	MX_USART2_UART_Init();
+	MX_I2C2_Init();
+	MX_SPI2_Init();
+
+	/* USER CODE BEGIN 2 */
+	GPIO_Init();
+	YM_RESET();  // reset the YM3812 chips
+	YM_SET_Def(); // set the default settings for the YM3812 chips
+	HAL_Delay(200);
+	HAL_UART_Receive_IT(&huart2, &data, 1); // enable the receive under interrupt mode for UART2
+	/* USER CODE END 2 */
+
+	/* Infinite loop */
+	/* USER CODE BEGIN WHILE */
+	while (1)
+	{
+		if(ReceiveFlag) // if the receiveflag is set, reset the flag and call the MIDI_PROC function
+		{
+			ReceiveFlag = FALSE;
+			MIDI_PROC(data);
+		}
+	/* USER CODE END WHILE */
+
+	/* USER CODE BEGIN 3 */
+
+	}
+	/* USER CODE END 3 */
+}
+
+>>>>>>> YM_dev_brian
 /**
   * @brief System Clock Configuration
   * @retval None
@@ -145,31 +183,34 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Initializes the CPU, AHB and APB busses clocks
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
-  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV2;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
@@ -193,7 +234,7 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 1 */
 
   /* USER CODE END ADC1_Init 1 */
-  /** Common config
+  /** Common config 
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
@@ -206,7 +247,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Regular Channel
+  /** Configure Regular Channel 
   */
   sConfig.Channel = ADC_CHANNEL_4;
   sConfig.Rank = ADC_REGULAR_RANK_1;
@@ -237,7 +278,7 @@ static void MX_I2C2_Init(void)
 
   /* USER CODE END I2C2_Init 1 */
   hi2c2.Instance = I2C2;
-  hi2c2.Init.ClockSpeed = 400000;
+  hi2c2.Init.ClockSpeed = 100000;
   hi2c2.Init.DutyCycle = I2C_DUTYCYCLE_2;
   hi2c2.Init.OwnAddress1 = 0;
   hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
@@ -309,20 +350,24 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 32500; //Baudrate of MIDI messages is 32500 baud
-  huart2.Init.WordLength = UART_WORDLENGTH_8B; //Wordlenght is 8b
-  huart2.Init.StopBits = UART_STOPBITS_1; //There will be one stopbit
-  huart2.Init.Parity = UART_PARITY_NONE; //There is no paritybit
-  huart2.Init.Mode = UART_MODE_TX_RX; //Use RX for receiving MIDI and TX for sending messages to serial monitor via Arduino
+  huart2.Init.BaudRate = 32500;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
   if (HAL_UART_Init(&huart2) != HAL_OK)
   {
     Error_Handler();
   }
+  /* USER CODE BEGIN USART2_Init 2 */
 
   HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(USART2_IRQn);
+
+  /* USER CODE END USART2_Init 2 */
+
 }
 
 /**
@@ -334,16 +379,15 @@ static void MX_GPIO_Init(void)
 {
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
+
 }
 
 /* USER CODE BEGIN 4 */
 void GPIO_Init()
 {
-	MX_GPIO_Init();
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
 
 	// ADC1_IN0
@@ -370,11 +414,10 @@ void GPIO_Init()
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-
 	// ADC1_IN6
 	GPIO_InitStruct.Pin = GPIO_PIN_6;
 	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	// ADC1_IN7
@@ -389,13 +432,11 @@ void GPIO_Init()
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-
 	// ADC1_IN9
 	GPIO_InitStruct.Pin = GPIO_PIN_1;
 	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
 
 	//I2C_CLOCK
 	GPIO_InitStruct.Pin = GPIO_PIN_10;
@@ -404,14 +445,12 @@ void GPIO_Init()
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-
 	//I2C_DATA
 	GPIO_InitStruct.Pin = GPIO_PIN_11;
 	GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
 
 	//SPI
 	GPIO_InitStruct.Pin = GPIO_PIN_15 | GPIO_PIN_14 | GPIO_PIN_13;
@@ -420,29 +459,61 @@ void GPIO_Init()
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-
-	//YM3812 PINS PART 1
-	GPIO_InitStruct.Pin = GPIO_PIN_2| GPIO_PIN_3| GPIO_PIN_4| GPIO_PIN_5| GPIO_PIN_6| GPIO_PIN_7| GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_12;
+	//YM_RST
+	GPIO_InitStruct.Pin = GPIO_PIN_8;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+	//YM3812 PINS PART 1
+<<<<<<< HEAD
+	GPIO_InitStruct.Pin = GPIO_PIN_2| GPIO_PIN_3| GPIO_PIN_4| GPIO_PIN_5| GPIO_PIN_6| GPIO_PIN_7| GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_12;
+=======
+	GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_12;
+>>>>>>> YM_dev_brian
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 	//YM3812 PINS PART 2
+<<<<<<< HEAD
 	GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11| GPIO_PIN_12| GPIO_PIN_13| GPIO_PIN_14|GPIO_PIN_15;
+=======
+	GPIO_InitStruct.Pin = GPIO_PIN_6 |GPIO_PIN_7 |GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14;
+>>>>>>> YM_dev_brian
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-
-	//LED PIN
-	GPIO_InitStruct.Pin = GPIO_PIN_13;
+	//LED PIN - Voor nu pinnen d0-d1 vor YM aansturing
+	GPIO_InitStruct.Pin = GPIO_PIN_13 | GPIO_PIN_14;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
 	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 }
+
+/**
+  * @brief UART interrupt handler
+  * @retval None
+  */
+void USART2_IRQHandler(void)
+{
+	HAL_UART_IRQHandler(&huart2); // calls the callback function
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if (huart->Instance == USART2)
+	{
+		ReceiveFlag = TRUE;						// set the receiveflag
+		HAL_UART_Receive_IT(&huart2, &data, 1); // enable receive under interrupt mode again
+	}
+}
+
 /* USER CODE END 4 */
 
 /**
@@ -466,7 +537,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{
+{ 
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

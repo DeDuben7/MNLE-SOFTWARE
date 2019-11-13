@@ -1,42 +1,15 @@
 /*
-*********************************************************************************************************
-*                                              EXAMPLE CODE
-*
-*                             (c) Copyright 2013; Micrium, Inc.; Weston, FL
-*
-*                   All rights reserved.  Protected by international copyright laws.
-*                   Knowledge of the source code may not be used to write a similar
-*                   product.  This file may only be used in accordance with a license
-*                   and should not be redistributed in any way.
-*********************************************************************************************************
-*/
-
-/*
-*********************************************************************************************************
-*
-*                                           MASTER INCLUDES
-*
-*                                     ST Microelectronics STM32
-*                                              with the
-*
-*                                           STM3240G-EVAL
-*                                         Evaluation Board
-*
 * Filename      : includes.h
 * Version       : V1.00
-* Programmer(s) : van der Bent
-* 				: COOcox
-*
-*  07-07-2014 toevoeging van false en true defines
-*********************************************************************************************************
+* Programmers   : Schotburgh, Oehlers en van Renswoude
 */
 
 #ifndef  INCLUDES_PRESENT
 #define  INCLUDES_PRESENT
-#define  OS_MASTER_FILE
+
 /*
 *********************************************************************************************************
-*                                         STANDARD LIBRARIES
+*                                           STANDARD LIBRARIES
 *********************************************************************************************************
 */
 
@@ -48,17 +21,20 @@
 
 /*
 *********************************************************************************************************
-*                                              LIBRARIES
+*                                                INCLUDES
 *********************************************************************************************************
 */
 
 #include "midi.h"
 #include "main.h"
-//#include "midi.c"
+#include "YM3812.h"
+#include "stm32f1xx_hal.h"
+#include <stm32f1xx_hal_tim.h>
+#include <stm32f1xx_hal_rcc.h>
 
 /*
 *********************************************************************************************************
-*                                                 OS
+*                                                 DEFINES
 *********************************************************************************************************
 */
 
@@ -74,11 +50,15 @@
 *********************************************************************************************************
 */
 
+<<<<<<< HEAD
 #define NO_FUNC		0x01
+=======
+#define NO_CHIP_SELECT 0x01
+>>>>>>> YM_dev_brian
 
 /*
 *********************************************************************************************************
-*                                            INCLUDES END
+*                                              INCLUDES END
 *********************************************************************************************************
 */
 
