@@ -255,13 +255,13 @@ void YM_SET_Def()
 	{
 		YM_WRITE_Databus(2,0x20 + op1[i],0x01); // set the multiplier to 1
 		YM_WRITE_Databus(2,0x40 + op1[i],0x00); // set the volume to the loudest volume possible
-		YM_WRITE_Databus(2,0x60 + op1[i],0x10); // Set the attack to fast and the decay to slow
+		YM_WRITE_Databus(2,0x60 + op1[i],0xF0); // Set the attack to fast and the decay to slow
 		YM_WRITE_Databus(2,0x80 + op1[i],0x77); // Set the sustain and release to medium
 		YM_WRITE_Databus(2,0xE0 + op1[i],0x02); // Set the waveform to a sine wave that is made fully positive
 
 		YM_WRITE_Databus(2,0x20 + op2[i],0x01); // set the multiplier to 1
 		YM_WRITE_Databus(2,0x40 + op2[i],0x00); // set the volume to the loudest volume possible
-		YM_WRITE_Databus(2,0x60 + op2[i],0x10); // Set the attack to fast and the decay to slow
+		YM_WRITE_Databus(2,0x60 + op2[i],0xF0); // Set the attack to fast and the decay to slow
 		YM_WRITE_Databus(2,0x80 + op2[i],0x77); // Set the sustain and release to medium
 		YM_WRITE_Databus(2,0xE0 + op2[i],0x02); // Set the waveform to a sine wave that is made fully positive
 	}

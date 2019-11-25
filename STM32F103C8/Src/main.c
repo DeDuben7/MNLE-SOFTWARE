@@ -104,42 +104,6 @@ int main(void)
 
 	/* USER CODE END SysInit */
 
-<<<<<<< HEAD
-  /* USER CODE BEGIN 2 */
-
-  HAL_UART_Receive_IT(&huart2, &data, 1);
-
-  while (1)
-  {
-	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-	  HAL_Delay(100);
-	  if(ReceiveFlag)
-	  {
-		  ReceiveFlag = FALSE;
-		  HAL_UART_Receive_IT(&huart2, &data, 1);
-		  MIDI_PROC(data);
-	  }
-  }
-}
-
-/**
-  * @brief UART interrupt handler
-  * @retval None
-  */
-void USART2_IRQHandler(void)
-{
-	HAL_UART_IRQHandler(&huart2);
-}
-
-/* This callback is called by the HAL_UART_IRQHandler when the given number of bytes are received */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-	if (huart->Instance == USART2)
-	{
-		ReceiveFlag = TRUE;
-	}
-}
-=======
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	//MX_ADC1_Init();
@@ -172,7 +136,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	/* USER CODE END 3 */
 }
 
->>>>>>> YM_dev_brian
 /**
   * @brief System Clock Configuration
   * @retval None
@@ -467,22 +430,14 @@ void GPIO_Init()
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 	//YM3812 PINS PART 1
-<<<<<<< HEAD
-	GPIO_InitStruct.Pin = GPIO_PIN_2| GPIO_PIN_3| GPIO_PIN_4| GPIO_PIN_5| GPIO_PIN_6| GPIO_PIN_7| GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_12;
-=======
 	GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_12;
->>>>>>> YM_dev_brian
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 	//YM3812 PINS PART 2
-<<<<<<< HEAD
-	GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11| GPIO_PIN_12| GPIO_PIN_13| GPIO_PIN_14|GPIO_PIN_15;
-=======
 	GPIO_InitStruct.Pin = GPIO_PIN_6 |GPIO_PIN_7 |GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14;
->>>>>>> YM_dev_brian
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_PULLUP;

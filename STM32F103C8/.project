@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>STM32F103C8 - V1</name>
-	<comment />
+	<name>STM32F103C8</name>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
