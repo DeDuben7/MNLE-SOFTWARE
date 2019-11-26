@@ -47,8 +47,9 @@
 //Function declarations for the YM3812
 uint8_t YM_WRITE_Databus(uint8_t chips, uint8_t adress, uint8_t data);
 uint8_t YM_WriteBits(uint8_t data);
-uint8_t YM_NOTE_ON(uint8_t MIDI_CHANNEL, uint8_t KEY_NUMBER, uint8_t VELOCITY);
+uint8_t YM_NOTE_ON(uint8_t VCH_Num);
 uint8_t YM_NOTE_OFF(uint8_t KEY_NUMBER, uint8_t VELOCITY);
+uint8_t YM_PITCH(uint8_t KeyNumber, uint8_t Velocity);
 void YM_SET_Def();
 void YM_RESET();
 

@@ -113,7 +113,7 @@ typedef struct
 	Operator OP2;
 }*pCCH;
 
-
+uint8_t YM_PitchValue;
 extern pCCH CCH[4];
 /* USER CODE END Private defines */
 

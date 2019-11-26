@@ -16,6 +16,7 @@ uint8_t NOTE_ON_FLAG;
 uint8_t NOTE_OFF_FLAG;
 uint8_t NOTE_PROG_CHANGE_FLAG;
 uint8_t NOTE_CONT_CHANGE_FLAG;
+uint8_t NOTE_PITCH_CHANGE_FLAG;
 
 /**
   * @brief Function for processing MIDI messages
@@ -44,6 +45,9 @@ uint8_t MIDI_PROC(uint8_t MIDI_MSG)
 
 		else if((MIDI_MSG & 0xF0) == 176)
 			NOTE_CONT_CHANGE_FLAG = 1;
+
+		else if((MIDI_MSG & 0xF0) == 240)
+			NOTE_PITCH_CHANGE_FLAG = 1;
 	}
 
 	else // If the received byte isn't the first byte of a message, process the byte
@@ -55,7 +59,7 @@ uint8_t MIDI_PROC(uint8_t MIDI_MSG)
 
 			if(i==2)				// If the last byte is received
 			{
-				YM_NOTE_ON(0,DATA[0],DATA[1]); // Call the Note On function
+				YM_PITCH(DATA[0],DATA[1]);
 				NOTE_ON_FLAG = 0;
 			}
 			return iError;
@@ -96,6 +100,20 @@ uint8_t MIDI_PROC(uint8_t MIDI_MSG)
 			{
 //				NOTE_CONT_CHANGE(MIDI_CHANNEL,FUNC_VAR[0],0); // Call the CONT_CHANGE function
 //				NOTE_CONT_CHANGE_FLAG = 0;
+			}
+			return iError;
+		}
+
+		else if(NOTE_PITCH_CHANGE_FLAG == 1) // If the message was Control change
+		{
+			iError = 0;
+			DATA[i++] = MIDI_MSG;			// Store the data
+
+			if(i==2)						// If the last byte is received
+			{
+				YM_PitchValue = DATA[1];
+				YM_PITCH(0,0); // Call the PICTH function
+				NOTE_PITCH_CHANGE_FLAG = 0;
 			}
 			return iError;
 		}

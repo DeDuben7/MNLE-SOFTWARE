@@ -137,9 +137,6 @@ uint8_t YM_WriteBits(uint8_t data)
 	return iError;
 }
 
-// Array with F-numbers, these represent the notes in one octave
-int F_Number[12] = {0x157,0x16B,0x181,0x198,0x1B0,0x1CA,0x1E5,0x202,0x220,0x241,0x263,0x287};
-
 // Create 9 voice channel structs for storing the data of each voice channel
 pVCH VCH[9];
 
@@ -147,30 +144,14 @@ pVCH VCH[9];
   * @brief Function for setting notes on different voice channels in the YM3812
   * @retval iError
   */
-uint8_t YM_NOTE_ON(uint8_t MIDI_CHANNEL, uint8_t KEY_NUMBER, uint8_t VELOCITY)
+uint8_t YM_NOTE_ON(uint8_t VCH_Num)
 {
 	uint8_t iError = 0;
-	int i;
 
-	for(i=0;i<9;i++) // Check for each voice channel if it is in use
-	{
-		if(VCH[i].Enable == FALSE || VCH[i].KEY_Numb == KEY_NUMBER) // If the voice channel is not used
-		{
-			// Set the variables of the voice channel
-			VCH[i].Enable 	= TRUE;
-			VCH[i].KEY_Numb = KEY_NUMBER;
-			VCH[i].F_Numb 	= F_Number[KEY_NUMBER % 12]; // The F_Numb is a number that represents a specific frequency in an octave
-			VCH[i].Octave 	= (KEY_NUMBER/12)-1;
-			VCH[i].Velocity = VELOCITY >> 1;
-
-			YM_WRITE_Databus(1,0xA0+i,VCH[i].F_Numb & 0xFF); // Set the lower byte of the frequency for chip 1
-			YM_WRITE_Databus(1,0xB0+i,(0x20 | (VCH[i].Octave << 2)) | ((VCH[i].F_Numb & 0x300) >> 8)); // Set the two most significant bits of the frequency, the octave and the note on for chip 2
-			YM_WRITE_Databus(2,0xA0+i,VCH[i].F_Numb & 0xFF); // Set the lower byte of the frequency for chip 1
-			YM_WRITE_Databus(2,0xB0+i,(0x20 | (VCH[i].Octave << 2)) | ((VCH[i].F_Numb & 0x300) >> 8)); // Set the two most significant bits of the frequency, the octave and the note on for chip 2
-
-			return iError;
-		}
-	}
+	YM_WRITE_Databus(1,0xA0+VCH_Num,VCH[VCH_Num].F_Numb & 0xFF); // Set the lower byte of the frequency for chip 1
+	YM_WRITE_Databus(1,0xB0+VCH_Num,(0x20 | (VCH[VCH_Num].Octave << 2)) | ((VCH[VCH_Num].F_Numb & 0x300) >> 8)); // Set the two most significant bits of the frequency, the octave and the note on for chip 2
+	YM_WRITE_Databus(2,0xA0+VCH_Num,VCH[VCH_Num].F_Numb & 0xFF); // Set the lower byte of the frequency for chip 1
+	YM_WRITE_Databus(2,0xB0+VCH_Num,(0x20 | (VCH[VCH_Num].Octave << 2)) | ((VCH[VCH_Num].F_Numb & 0x300) >> 8)); // Set the two most significant bits of the frequency, the octave and the note on for chip 2
 
 	return iError;
 }
@@ -206,6 +187,71 @@ uint8_t YM_NOTE_OFF(uint8_t KEY_NUMBER, uint8_t VELOCITY)
 	return iError;
 }
 
+// Array with F-numbers, these represent the notes in one octave
+int F_Number[16] = {0x134,0x146,0x15A,0x16E,0x184,0x19B,0x1B4,0x1CE,0x1E9,0x206,0x225,0x246,0x268,0x28D,0x2B4,0x2DD};
+
+uint8_t YM_PITCH(uint8_t KeyNumber, uint8_t Velocity)
+{
+	uint8_t iError = 0;
+	uint8_t VCH_Num;
+	uint8_t ArrayNumb = (KeyNumber % 12) + 2;
+
+	if(KeyNumber == 0)
+	{
+		// Alleen pitch change
+		for(VCH_Num=0;VCH_Num<9;VCH_Num++)
+		{
+			if(VCH[VCH_Num].Enable == TRUE)
+			{
+				ArrayNumb = (VCH[VCH_Num].KEY_Numb % 12) + 2;
+
+				if(YM_PitchValue < 64) // benden naar beneden
+				{
+					VCH[VCH_Num].F_Numb = F_Number[ArrayNumb] - ((64 - YM_PitchValue) * (F_Number[ArrayNumb] - F_Number[ArrayNumb - 2]))/63;
+				}
+
+				else // benden naar boven
+				{
+					VCH[VCH_Num].F_Numb = F_Number[ArrayNumb] + ((YM_PitchValue - 64) * (F_Number[ArrayNumb + 2] - F_Number[ArrayNumb]))/63;
+				}
+
+				YM_NOTE_ON(VCH_Num);
+			}
+		}
+	}
+
+	else
+	{
+		// Nieuwe noot
+		for(VCH_Num=0;VCH_Num<9;VCH_Num++) // Check for each voice channel if it is in use
+		{
+			if(VCH[VCH_Num].Enable == FALSE || VCH[VCH_Num].KEY_Numb == KeyNumber) // If the voice channel is not used
+			{
+				// Set the variables of the voice channel
+				VCH[VCH_Num].Enable 	= TRUE;
+				VCH[VCH_Num].KEY_Numb 	= KeyNumber;
+				VCH[VCH_Num].Octave 	= (KeyNumber/12)-1;
+				VCH[VCH_Num].Velocity 	= Velocity >> 1;
+
+				if(YM_PitchValue < 64) // benden naar beneden
+				{
+					VCH[VCH_Num].F_Numb = F_Number[ArrayNumb] - ((64 - YM_PitchValue) * (F_Number[ArrayNumb] - F_Number[ArrayNumb - 2]))/63;
+				}
+
+				else // benden naar boven
+				{
+					VCH[VCH_Num].F_Numb = F_Number[ArrayNumb] + ((YM_PitchValue - 64) * (F_Number[ArrayNumb + 2] - F_Number[ArrayNumb]))/63;
+				}
+
+				YM_NOTE_ON(VCH_Num);
+
+				return iError;
+			}
+		}
+	}
+
+	return iError;
+}
 
 /**
   * @brief Function for resetting the YM3812
@@ -257,13 +303,13 @@ void YM_SET_Def()
 		YM_WRITE_Databus(2,0x40 + op1[i],0x00); // set the volume to the loudest volume possible
 		YM_WRITE_Databus(2,0x60 + op1[i],0xF0); // Set the attack to fast and the decay to slow
 		YM_WRITE_Databus(2,0x80 + op1[i],0x77); // Set the sustain and release to medium
-		YM_WRITE_Databus(2,0xE0 + op1[i],0x02); // Set the waveform to a sine wave that is made fully positive
+		YM_WRITE_Databus(2,0xE0 + op1[i],0x00); // Set the waveform to a sine wave that is made fully positive
 
 		YM_WRITE_Databus(2,0x20 + op2[i],0x01); // set the multiplier to 1
 		YM_WRITE_Databus(2,0x40 + op2[i],0x00); // set the volume to the loudest volume possible
 		YM_WRITE_Databus(2,0x60 + op2[i],0xF0); // Set the attack to fast and the decay to slow
 		YM_WRITE_Databus(2,0x80 + op2[i],0x77); // Set the sustain and release to medium
-		YM_WRITE_Databus(2,0xE0 + op2[i],0x02); // Set the waveform to a sine wave that is made fully positive
+		YM_WRITE_Databus(2,0xE0 + op2[i],0x00); // Set the waveform to a sine wave that is made fully positive
 	}
 }
 
