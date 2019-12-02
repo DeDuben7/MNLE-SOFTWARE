@@ -58,6 +58,27 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 uint8_t ReceiveFlag = FALSE;
 uint8_t data;
+
+uint8_t AIODIR		=	0x00;
+uint8_t AIPOL		=	0x02;
+uint8_t AGPINTEN 	=	0x04;
+uint8_t AIOCON		=	0x08;
+uint8_t AGPPU		=	0x0C;
+uint8_t AINTF		=	0x0E;
+uint8_t AINTCAP 	=	0x10;
+uint8_t AGPIO		=	0x12;	//outputs schrijven
+uint8_t AOLAT 		=	0x14;
+uint8_t OPCODE		=	0x4100;
+
+uint8_t IODIR 		= 0;
+uint8_t IPOL  		= 0;
+uint8_t GPINTEN 	= 0;
+uint8_t IOCON 		= 56; //0011 1000
+uint8_t GPPU 		= 0;
+uint8_t INTF 		= 0;
+uint8_t INTCAP 		= 0;
+uint8_t GPIO_ON		= 1;
+uint8_t GPIO_OFF	= 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -117,6 +138,16 @@ int main(void)
 	YM_SET_Def(); // set the default settings for the YM3812 chips
 	HAL_Delay(200);
 	HAL_UART_Receive_IT(&huart2, &data, 1); // enable the receive under interrupt mode for UART2
+
+	int SPI_Dat;
+	SPI_Dat = OPCODE | AIODIR;
+
+	HAL_SPI_Transmit_IT(&hspi2, &SPI_Dat, 2);
+	HAL_SPI_Transmit_IT(&hspi2, &IODIR, 2);
+
+	SPI_Dat = OPCODE | AIOCON;
+	HAL_SPI_Transmit_IT(&hspi2, &SPI_Dat, 2);
+	HAL_SPI_Transmit_IT(&hspi2, &IOCON, 2);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -127,6 +158,14 @@ int main(void)
 		{
 			ReceiveFlag = FALSE;
 			MIDI_PROC(data);
+
+			HAL_SPI_Transmit_IT(&hspi2, &AGPIO, 2);
+			HAL_SPI_Transmit_IT(&hspi2, &GPIO_ON, 2);
+			HAL_Delay(100);
+			HAL_SPI_Transmit_IT(&hspi2, &AGPIO, 2);
+			HAL_SPI_Transmit_IT(&hspi2, &GPIO_OFF, 2);
+			HAL_Delay(100);
+
 		}
 	/* USER CODE END WHILE */
 
