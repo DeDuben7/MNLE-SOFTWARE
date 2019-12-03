@@ -68,17 +68,17 @@ uint8_t AINTF		=	0x0E;
 uint8_t AINTCAP 	=	0x10;
 uint8_t AGPIO		=	0x12;	//outputs schrijven
 uint8_t AOLAT 		=	0x14;
-uint8_t OPCODE		=	0x4100;
+uint16_t OPCODE		=	0x4000;
 
-uint8_t IODIR 		= 0;
+uint8_t IODIR 		= 0x00;
 uint8_t IPOL  		= 0;
 uint8_t GPINTEN 	= 0;
-uint8_t IOCON 		= 56; //0011 1000
+uint8_t IOCON 		= 0x20; //0011 1000
 uint8_t GPPU 		= 0;
 uint8_t INTF 		= 0;
 uint8_t INTCAP 		= 0;
-uint8_t GPIO_ON		= 1;
-uint8_t GPIO_OFF	= 0;
+uint8_t GPIO_ON		= 0xFF;
+uint8_t GPIO_OFF	= 0x00;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -130,7 +130,7 @@ int main(void)
 	//MX_ADC1_Init();
 	MX_USART2_UART_Init();
 	MX_I2C2_Init();
-	MX_SPI2_Init();
+	MX_SPI1_Init();
 
 	/* USER CODE BEGIN 2 */
 	GPIO_Init();
@@ -139,15 +139,20 @@ int main(void)
 	HAL_Delay(200);
 	HAL_UART_Receive_IT(&huart2, &data, 1); // enable the receive under interrupt mode for UART2
 
-	int SPI_Dat;
+	uint8_t SPI_Dat;
+
 	SPI_Dat = OPCODE | AIODIR;
-
-	HAL_SPI_Transmit_IT(&hspi2, &SPI_Dat, 2);
-	HAL_SPI_Transmit_IT(&hspi2, &IODIR, 2);
-
+	HAL_SPI_Transmit(&hspi2, &SPI_Dat, 2, 1);
+	while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
+	SPI_Dat = OPCODE | IODIR;
+	HAL_SPI_Transmit(&hspi2, &SPI_Dat, 2, 1);
+	while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
 	SPI_Dat = OPCODE | AIOCON;
-	HAL_SPI_Transmit_IT(&hspi2, &SPI_Dat, 2);
-	HAL_SPI_Transmit_IT(&hspi2, &IOCON, 2);
+	HAL_SPI_Transmit(&hspi2, &SPI_Dat, 2, 1);
+	while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
+	SPI_Dat = OPCODE | IOCON;
+	HAL_SPI_Transmit(&hspi2, &SPI_Dat, 2, 1);
+	while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -159,11 +164,19 @@ int main(void)
 			ReceiveFlag = FALSE;
 			MIDI_PROC(data);
 
-			HAL_SPI_Transmit_IT(&hspi2, &AGPIO, 2);
-			HAL_SPI_Transmit_IT(&hspi2, &GPIO_ON, 2);
+			SPI_Dat = OPCODE | AGPIO;
+			HAL_SPI_Transmit(&hspi2, &SPI_Dat, 2, 1);
+			while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
+			SPI_Dat = OPCODE | GPIO_ON;
+			HAL_SPI_Transmit(&hspi2, &SPI_Dat, 2, 1);
+			while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
 			HAL_Delay(100);
-			HAL_SPI_Transmit_IT(&hspi2, &AGPIO, 2);
-			HAL_SPI_Transmit_IT(&hspi2, &GPIO_OFF, 2);
+			SPI_Dat = OPCODE | AGPIO;
+			HAL_SPI_Transmit(&hspi2, &SPI_Dat, 2, 1);
+			while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
+			SPI_Dat = OPCODE | GPIO_OFF;
+			HAL_SPI_Transmit(&hspi2, &SPI_Dat, 2, 1);
+			while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
 			HAL_Delay(100);
 
 		}
@@ -333,7 +346,6 @@ static void MX_SPI2_Init(void)
   /* USER CODE BEGIN SPI2_Init 2 */
 
   /* USER CODE END SPI2_Init 2 */
-
 }
 
 /**
@@ -450,13 +462,6 @@ void GPIO_Init()
 	//I2C_DATA
 	GPIO_InitStruct.Pin = GPIO_PIN_11;
 	GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-	//SPI
-	GPIO_InitStruct.Pin = GPIO_PIN_15 | GPIO_PIN_14 | GPIO_PIN_13;
-	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
