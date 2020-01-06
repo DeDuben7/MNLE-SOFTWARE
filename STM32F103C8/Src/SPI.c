@@ -1,9 +1,15 @@
-/*
- * SPI.c
- *
- *  Created on: 9 dec. 2019
- *      Author: Ruben
- */
+/**
+  ******************************************************************************
+  * @file			SPI.c
+  * @brief        	Header for main.c file.
+  *               	This file contains the common defines of the application.
+  * @version		V1.00
+  * @authors		Oehlers, van Renswoude and Schotborgh
+  * @date			06-01-2020
+  ******************************************************************************
+  * @details
+  ******************************************************************************
+*/
 
 #include "includes.h"
 

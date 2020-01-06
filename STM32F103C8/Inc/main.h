@@ -1,26 +1,14 @@
 /* USER CODE BEGIN Header */
-/*
-* Filename      : main.h
-* Version       : V1.00
-* Programmers   : Schotburgh, Oehlers en van Renswoude
-*/
 /**
-******************************************************************************
-* @file           : main.h
-* @brief          : Header for main.c file.
-*                   This file contains the common defines of the application.
-******************************************************************************
-* @attention
-*
-* <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-* All rights reserved.</center></h2>
-*
-* This software component is licensed by ST under BSD 3-Clause license,
-* the "License"; You may not use this file except in compliance with the
-* License. You may obtain a copy of the License at:
-*                        opensource.org/licenses/BSD-3-Clause
-*
-******************************************************************************
+  ******************************************************************************
+  * @file			main.h
+  * @brief        	Header for main.c file.
+  * @version		V1.00
+  * @authors		Oehlers, van Renswoude and Schotborgh
+  * @date			06-01-2020
+  ******************************************************************************
+  * @details		This file contains the common defines of the application.
+  ******************************************************************************
 */
 /* USER CODE END Header */
 
@@ -65,15 +53,15 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 /* USER CODE BEGIN Private defines */
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
+ADC_HandleTypeDef hadc1; /**< handle for adc functions */
 
-SPI_HandleTypeDef hspi1;
+SPI_HandleTypeDef hspi1; /**< handle for spi functions */
 
-TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim1; /**< handle for the timer functions */
 
-UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart2; /**< handle for the uart function */
 
-typedef struct
+typedef struct /**< structure for storing the effect settings of each chip channel */
 {
 	uint8_t Waveform;
 	uint8_t AM;
@@ -89,8 +77,7 @@ typedef struct
 	uint8_t ScalingLevel;
 }Operator;
 
-/* Struct om data op te slaan per voice channel ------------------------------*/
-typedef struct
+typedef struct /**< Structure for storing the data of each voice channel */
 {
 	uint8_t Enable;
 	uint8_t KEY_Numb;
@@ -101,8 +88,7 @@ typedef struct
 
 }pVCH;
 
-/* Struct om data op te slaan per chip channel -------------------------------*/
-typedef struct
+typedef struct /**< structure for storing the effect settings of each operator */
 {
 	uint8_t AM_Depth;
 	uint8_t Vib_Depth;
@@ -113,8 +99,8 @@ typedef struct
 	Operator OP2;
 }*pCCH;
 
-uint8_t YM_PitchValue;
-extern pCCH CCH[4];
+uint8_t YM_PitchValue; /**< Variable for storing the pitchvalue from the pitchwheel  */
+extern pCCH CCH[4]; /**< four variables for the effects settings structs of each chip channel */
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

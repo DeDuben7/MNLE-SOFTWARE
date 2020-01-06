@@ -1,9 +1,14 @@
-/*
- * SPI.h
- *
- *  Created on: 9 dec. 2019
- *      Author: Ruben
- */
+/**
+  ******************************************************************************
+  * @file			SPI.h
+  * @brief        	Header for SPI.c file.
+  * @version		V1.00
+  * @authors		Oehlers, van Renswoude and Schotborgh
+  * @date			06-01-2020
+  ******************************************************************************
+  * @details		This file contains the common defines of the application.
+  ******************************************************************************
+*/
 
 #ifndef SPI_H_
 #define SPI_H_
