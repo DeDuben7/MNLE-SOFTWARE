@@ -1,7 +1,14 @@
-/*
-* Filename      : MIDI.h
-* Version       : V1.00
-* Programmer(s) : Schotburgh, Oehlers en van Renswoude
+/**
+  ******************************************************************************
+  *
+  * @file			MIDI.h
+  * @brief			Defines voor MIDI.C
+  * @version		V1.0
+  * @authors  		Schotborgh, Oehlers en van Renswoude
+  * @date			25-10-19
+  ******************************************************************************
+  * @details		This file contains the defines for MIDI.C
+  ******************************************************************************
 */
 
 /*
@@ -9,18 +16,18 @@
  * Libraries
 *********************************************************************************************************
 */
-#include "includes.h"
+#include "includes.h"	/**< Includes the includes library */
 
 /*
 *********************************************************************************************************
  * Defines
 *********************************************************************************************************
 */
-#define NOTE_ON 	9
-#define NOTE_OFF 	8
-#define CONT_CHANGE 11
-#define PROG_CHANGE 12
-#define PITCH 		14
+#define NOTE_ON 	9	/**< Note on 			is recieved as bits  1001*/
+#define NOTE_OFF 	8	/**< Note off 			is recieved as bits  1000*/
+#define CONT_CHANGE 11	/**< Controll change 	is recieved as bits  1011*/
+#define PROG_CHANGE 12	/**< Program change 	is recieved as bits  1100*/
+#define PITCH 		14	/**< Pitch 				is recieved as bits  1110*/
 
 
 

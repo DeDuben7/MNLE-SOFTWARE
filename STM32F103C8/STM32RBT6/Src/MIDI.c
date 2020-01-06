@@ -1,26 +1,40 @@
-/*
-* Filename      : MIDI.c
-* Version       : V1.00
-* Programmer(s) : Schotburgh, Oehlers en van Renswoude
+/**
+  ******************************************************************************
+  *
+  * @file			MIDI.c
+  * @brief			Filters incoming MIDI messages.
+  * @version			V2.0
+  * @authors  		Schotborgh, Oehlers en van Renswoude
+  * @date			25-10-19
+  ******************************************************************************
+  * @details			This file filters incoming MIDI messages in MIDI functions.
+  * 					When filterd it will send the messages to the corresponding function.
+  ******************************************************************************
 */
+
 
 #include "includes.h"
 
-int i = 0;  			// Counter variable for MIDI_PROC function
-uint8_t DATA[2]; 		// Array for storing incoming data
-char MIDI_FUNC; 		// Variable for storing the function nibble
-char MIDI_CHANNEL; 		// Variable for storing the channel nibble
+int i = 0;  			// Counter variable for MIDI_PROC function			/**< integer for counting incominging bytes.*/
+uint8_t DATA[2]; 		// Array for storing incoming data					/**< Data array for saving incomming data byts from MIDI messages.*/
+char MIDI_FUNC; 		// Variable for storing the function nibble			/**< Nibble for storing the function of the MIDI message*/
+char MIDI_CHANNEL; 		// Variable for storing the channel nibble			/**< Nibble for storing the channel of the MIDI message*/
 
 // Some flags for receiving different messages
-uint8_t NOTE_ON_FLAG;
-uint8_t NOTE_OFF_FLAG;
-uint8_t NOTE_PROG_CHANGE_FLAG;
-uint8_t NOTE_CONT_CHANGE_FLAG;
-uint8_t NOTE_PITCH_CHANGE_FLAG;
+uint8_t NOTE_ON_FLAG;			/**< value made for flagging note on*/
+uint8_t NOTE_OFF_FLAG;			/**< value made for flagging note off*/
+uint8_t NOTE_PROG_CHANGE_FLAG;	/**< value made for flagging program change*/
+uint8_t NOTE_CONT_CHANGE_FLAG;	/**< value made for flagging control change*/
+uint8_t NOTE_PITCH_CHANGE_FLAG;	/**< value made for flagging pitch change */
 
 /**
-  * @brief Function for processing MIDI messages
-  * @retval iError
+  * @brief 			Function for processing MIDI messages
+  * @headerfile 	includes.h ""
+  * @param 			MIDI_MSG is an eight bit integer wich is a byte of the incoming MIDI message
+  * @val			None
+  * @return			iError
+  * @details 		Checks if incoming message is first or second byte. If first byte, it will check wich function and post a corresponding flag.
+  * 		 		If second byte, checks wich flag is posted and sends the data array to corresponding function.
   */
 uint8_t MIDI_PROC(uint8_t MIDI_MSG)
 {
