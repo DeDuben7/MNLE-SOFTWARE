@@ -23,17 +23,21 @@ uint8_t YM_WRITE_Databus(uint8_t chip, uint8_t address, uint8_t data)
 		YM_WriteBits(address);
 		HAL_GPIO_WritePin(GPIOA,YM_CS_1,GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOC,YM_WR,GPIO_PIN_RESET);
+//		HAL_GPIO_WritePin(GPIOC,IO_1,GPIO_PIN_RESET);			// KAPOTE PCB YM_WRITE VERVANGING
 		for(i=0; i<0x06; i++);							//0x05   1us
 		HAL_GPIO_WritePin(GPIOA,YM_CS_1,GPIO_PIN_SET);
 		HAL_GPIO_WritePin(GPIOC,YM_WR,GPIO_PIN_SET);
+//		HAL_GPIO_WritePin(GPIOC,IO_1,GPIO_PIN_SET);
 		for(i=0; i<0x22; i++);							//0x05   4us hold address time
 		HAL_GPIO_WritePin(GPIOC,YM_A0,GPIO_PIN_SET);
 		YM_WriteBits(data);
 		HAL_GPIO_WritePin(GPIOA,YM_CS_1,GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOC,YM_WR,GPIO_PIN_RESET);
+//		HAL_GPIO_WritePin(GPIOC,IO_1,GPIO_PIN_RESET);
 		for(i=0; i<0x06; i++);							//0x05   1us
 		HAL_GPIO_WritePin(GPIOA,YM_CS_1,GPIO_PIN_SET);
 		HAL_GPIO_WritePin(GPIOC,YM_WR,GPIO_PIN_SET);
+//		HAL_GPIO_WritePin(GPIOC,IO_1,GPIO_PIN_SET);
 		for(i=0; i<0xDD; i++);							//0x05   23us hold data time
 	}
 
@@ -101,6 +105,7 @@ uint8_t YM_WriteBits(uint8_t data)
 	uint8_t iError = 0;
 	uint16_t wridata = 0;
 	HAL_GPIO_WritePin(GPIOD, YM_D0, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOC, IO_2, GPIO_PIN_RESET);
 
 
 	// Check which pins need to be set
@@ -113,7 +118,8 @@ uint8_t YM_WriteBits(uint8_t data)
 		wridata |= YM_D1;
 
 	if(data & 4)
-		wridata |= YM_D2;
+//		wridata |= YM_D2;
+		HAL_GPIO_WritePin(GPIOC, IO_2, GPIO_PIN_SET);
 
 	if(data & 8)
 		wridata |= YM_D3;
