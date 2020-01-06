@@ -40,8 +40,8 @@
 
 
 /* USER CODE BEGIN PV */
-uint8_t ReceiveFlag = FALSE;
-uint8_t data;
+uint8_t ReceiveFlag = FALSE; 	/**< flag to indicate whether a uart message is received */
+uint8_t data;				 	/**< byte for storing the received uart data */
 
 /* USER CODE END PV */
 
@@ -66,13 +66,19 @@ void GPIO_Init(void);
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
+  ******************************************************************************
+  * @brief			The application entry point.
+  * @headerfile x.h ""
+  * @param 			None
+  * @val
+  * @return None
+  ******************************************************************************
+  * @details
+  ******************************************************************************
   */
-int main(void)
+void main(void)
 {
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
   
 
@@ -121,8 +127,15 @@ int main(void)
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
+  ******************************************************************************
+  * @brief			The application entry point.
+  * @headerfile x.h ""
+  * @param 			None
+  * @val
+  * @return None
+  ******************************************************************************
+  * @details
+  ******************************************************************************
   */
 void SystemClock_Config(void)
 {
@@ -165,9 +178,15 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief ADC1 Initialization Function
-  * @param None
-  * @retval None
+  ******************************************************************************
+  * @brief			The application entry point.
+  * @headerfile x.h ""
+  * @param 			None
+  * @val
+  * @return None
+  ******************************************************************************
+  * @details
+  ******************************************************************************
   */
 static void MX_ADC1_Init(void)
 {
@@ -210,9 +229,15 @@ static void MX_ADC1_Init(void)
 }
 
 /**
-  * @brief SPI1 Initialization Function
-  * @param None
-  * @retval None
+  ******************************************************************************
+  * @brief			The application entry point.
+  * @headerfile x.h ""
+  * @param 			None
+  * @val
+  * @return None
+  ******************************************************************************
+  * @details
+  ******************************************************************************
   */
 static void MX_SPI1_Init(void)
 {
@@ -249,9 +274,15 @@ static void MX_SPI1_Init(void)
 }
 
 /**
-  * @brief TIM1 Initialization Function
-  * @param None
-  * @retval None
+  ******************************************************************************
+  * @brief			The application entry point.
+  * @headerfile x.h ""
+  * @param 			None
+  * @val
+  * @return None
+  ******************************************************************************
+  * @details
+  ******************************************************************************
   */
 static void MX_TIM1_Init(void)
 {
@@ -298,9 +329,15 @@ static void MX_TIM1_Init(void)
 }
 
 /**
-  * @brief USART2 Initialization Function
-  * @param None
-  * @retval None
+  ******************************************************************************
+  * @brief			The application entry point.
+  * @headerfile x.h ""
+  * @param 			None
+  * @val
+  * @return None
+  ******************************************************************************
+  * @details
+  ******************************************************************************
   */
 static void MX_USART2_UART_Init(void)
 {
@@ -334,9 +371,15 @@ static void MX_USART2_UART_Init(void)
 }
 
 /**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
+  ******************************************************************************
+  * @brief			The application entry point.
+  * @headerfile x.h ""
+  * @param 			None
+  * @val
+  * @return None
+  ******************************************************************************
+  * @details
+  ******************************************************************************
   */
 static void MX_GPIO_Init(void)
 {
@@ -349,6 +392,17 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+/**
+  ******************************************************************************
+  * @brief			The application entry point.
+  * @headerfile x.h ""
+  * @param 			None
+  * @val
+  * @return None
+  ******************************************************************************
+  * @details
+  ******************************************************************************
+  */
 void GPIO_Init()
 {
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -449,8 +503,15 @@ void GPIO_Init()
 }
 
 /**
-  * @brief UART interrupt handler
-  * @retval None
+  ******************************************************************************
+  * @brief			The application entry point.
+  * @headerfile x.h ""
+  * @param 			None
+  * @val
+  * @return None
+  ******************************************************************************
+  * @details
+  ******************************************************************************
   */
 void USART2_IRQHandler(void)
 {
@@ -467,8 +528,15 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
+  ******************************************************************************
+  * @brief			The application entry point.
+  * @headerfile x.h ""
+  * @param 			None
+  * @val
+  * @return None
+  ******************************************************************************
+  * @details
+  ******************************************************************************
   */
 void Error_Handler(void)
 {
