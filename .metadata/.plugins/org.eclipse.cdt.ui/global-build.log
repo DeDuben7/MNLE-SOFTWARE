@@ -1,0 +1,213 @@
+15:12:45 **** Incremental Build of configuration Debug for project STM32F103C8 ****
+make all 
+Building file: ../Src/IOExp.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/IOExp.d" -MT"Src/IOExp.o" -o "Src/IOExp.o" "../Src/IOExp.c"
+In file included from C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:149:0,
+                 from C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:45,
+                 from C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc/stm32f1xx_hal_conf.h:238,
+                 from C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc/main.h:36,
+                 from C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc/includes.h:31,
+                 from ../Src/IOExp.c:7:
+C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:712:44: error: expected ')' before '*' token
+ #define GPIOA               ((GPIO_TypeDef *)GPIOA_BASE)
+                                            ^
+../Src/IOExp.c:19:9: note: in expansion of macro 'GPIOA'
+ uint8_t GPIOA  = 0x12;
+         ^~~~~
+C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:649:31: error: expected ')' before '(' token
+ #define GPIOA_BASE            (APB2PERIPH_BASE + 0x00000800U)
+                               ^
+C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:712:46: note: in expansion of macro 'GPIOA_BASE'
+ #define GPIOA               ((GPIO_TypeDef *)GPIOA_BASE)
+                                              ^~~~~~~~~~
+../Src/IOExp.c:19:9: note: in expansion of macro 'GPIOA'
+ uint8_t GPIOA  = 0x12;
+         ^~~~~
+C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:713:44: error: expected ')' before '*' token
+ #define GPIOB               ((GPIO_TypeDef *)GPIOB_BASE)
+                                            ^
+../Src/IOExp.c:20:9: note: in expansion of macro 'GPIOB'
+ uint8_t GPIOB  = 0x13;
+         ^~~~~
+C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:650:31: error: expected ')' before '(' token
+ #define GPIOB_BASE            (APB2PERIPH_BASE + 0x00000C00U)
+                               ^
+C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:713:46: note: in expansion of macro 'GPIOB_BASE'
+ #define GPIOB               ((GPIO_TypeDef *)GPIOB_BASE)
+                                              ^~~~~~~~~~
+../Src/IOExp.c:20:9: note: in expansion of macro 'GPIOB'
+ uint8_t GPIOB  = 0x13;
+         ^~~~~
+make: *** [Src/IOExp.o] Error 1
+Src/subdir.mk:42: recipe for target 'Src/IOExp.o' failed
+15:12:54 **** Incremental Build of configuration Debug for project STM32F103C8 ****
+make all 
+Building file: ../Src/IOExp.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/IOExp.d" -MT"Src/IOExp.o" -o "Src/IOExp.o" "../Src/IOExp.c"
+Finished building: ../Src/IOExp.c
+ 
+Building target: STM32F103C8.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft -specs=nosys.specs -specs=nano.specs -T"../STM32F103C8Tx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "STM32F103C8.elf" @"objects.list"   -lm
+Finished building target: STM32F103C8.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "STM32F103C8.elf" "STM32F103C8.hex"
+arm-none-eabi-size "STM32F103C8.elf"
+   text	   data	    bss	    dec	    hex	filename
+   7660	     20	   1844	   9524	   2534	STM32F103C8.elf
+ 
+14:25:19 **** Build of configuration Debug for project STM32F103C8 ****
+make all 
+Building file: ../Src/IOExp.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/IOExp.d" -MT"Src/IOExp.o" -o "Src/IOExp.o" "../Src/IOExp.c"
+../Src/IOExp.c: In function 'UI_PROC':
+../Src/IOExp.c:66:9: warning: 'iError' is used uninitialized in this function [-Wuninitialized]
+  return iError;
+         ^~~~~~
+Finished building: ../Src/IOExp.c
+ 
+Building file: ../Src/MIDI.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/MIDI.d" -MT"Src/MIDI.o" -o "Src/MIDI.o" "../Src/MIDI.c"
+Finished building: ../Src/MIDI.c
+ 
+Building file: ../Src/SPI.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/SPI.d" -MT"Src/SPI.o" -o "Src/SPI.o" "../Src/SPI.c"
+Finished building: ../Src/SPI.c
+ 
+Building file: ../Src/YM3812.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/YM3812.d" -MT"Src/YM3812.o" -o "Src/YM3812.o" "../Src/YM3812.c"
+Finished building: ../Src/YM3812.c
+ 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+../Src/main.c:79:6: warning: return type of 'main' is not 'int' [-Wmain]
+ void main(void)
+      ^~~~
+Finished building: ../Src/main.c
+ 
+Building file: ../Src/stm32f1xx_hal_msp.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/stm32f1xx_hal_msp.d" -MT"Src/stm32f1xx_hal_msp.o" -o "Src/stm32f1xx_hal_msp.o" "../Src/stm32f1xx_hal_msp.c"
+Finished building: ../Src/stm32f1xx_hal_msp.c
+ 
+Building file: ../Src/stm32f1xx_it.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/stm32f1xx_it.d" -MT"Src/stm32f1xx_it.o" -o "Src/stm32f1xx_it.o" "../Src/stm32f1xx_it.c"
+Finished building: ../Src/stm32f1xx_it.c
+ 
+Building file: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.o" -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.o" "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c"
+Finished building: ../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c
+ 
+Building target: STM32F103C8.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft -specs=nosys.specs -specs=nano.specs -T"../STM32F103C8Tx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "STM32F103C8.elf" @"objects.list"   -lm
+Finished building target: STM32F103C8.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "STM32F103C8.elf" "STM32F103C8.hex"
+arm-none-eabi-size "STM32F103C8.elf"
+   text	   data	    bss	    dec	    hex	filename
+   7660	     20	   1844	   9524	   2534	STM32F103C8.elf
+ 
+14:25:34 **** Build of configuration Debug for project STM32RBT6 ****
+make all 
+Building file: ../startup/startup_stm32f103xb.s
+Invoking: MCU GCC Assembler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\STM32RBT6\Debug
+arm-none-eabi-as -mcpu=cortex-m3 -mthumb -mfloat-abi=soft -g -o "startup/startup_stm32f103xb.o" "../startup/startup_stm32f103xb.s"
+Finished building: ../startup/startup_stm32f103xb.s
+ 
+Building file: ../Src/IOExp.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\STM32RBT6\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/IOExp.d" -MT"Src/IOExp.o" -o "Src/IOExp.o" "../Src/IOExp.c"
+../Src/IOExp.c: In function 'UI_INIT':
+../Src/IOExp.c:35:2: warning: implicit declaration of function 'SPI_Transmit'; did you mean 'HAL_SPI_Transmit'? [-Wimplicit-function-declaration]
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_1); // disable sequential mode, int polarity active high
+  ^~~~~~~~~~~~
+  HAL_SPI_Transmit
+../Src/IOExp.c:35:30: error: 'IO_EXP_1' undeclared (first use in this function); did you mean 'IOEXP_H_'?
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_1); // disable sequential mode, int polarity active high
+                              ^~~~~~~~
+                              IOEXP_H_
+../Src/IOExp.c:35:30: note: each undeclared identifier is reported only once for each function it appears in
+../Src/IOExp.c:47:30: error: 'IO_EXP_2' undeclared (first use in this function); did you mean 'IO_EXP_1'?
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_2); // disable sequential mode, int polarity active high
+                              ^~~~~~~~
+                              IO_EXP_1
+make: *** [Src/IOExp.o] Error 1
+Src/subdir.mk:42: recipe for target 'Src/IOExp.o' failed
+14:36:40 **** Incremental Build of configuration Debug for project STM32F103C8 ****
+make all 
+make: Nothing to be done for 'all'.
+14:36:41 **** Incremental Build of configuration Debug for project STM32RBT6 ****
+make all 
+Building file: ../Src/IOExp.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\STM32RBT6\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/IOExp.d" -MT"Src/IOExp.o" -o "Src/IOExp.o" "../Src/IOExp.c"
+../Src/IOExp.c: In function 'UI_INIT':
+../Src/IOExp.c:35:2: warning: implicit declaration of function 'SPI_Transmit'; did you mean 'HAL_SPI_Transmit'? [-Wimplicit-function-declaration]
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_1); // disable sequential mode, int polarity active high
+  ^~~~~~~~~~~~
+  HAL_SPI_Transmit
+../Src/IOExp.c:35:30: error: 'IO_EXP_1' undeclared (first use in this function); did you mean 'IOEXP_H_'?
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_1); // disable sequential mode, int polarity active high
+                              ^~~~~~~~
+                              IOEXP_H_
+../Src/IOExp.c:35:30: note: each undeclared identifier is reported only once for each function it appears in
+../Src/IOExp.c:47:30: error: 'IO_EXP_2' undeclared (first use in this function); did you mean 'IO_EXP_1'?
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_2); // disable sequential mode, int polarity active high
+                              ^~~~~~~~
+                              IO_EXP_1
+Src/subdir.mk:42: recipe for target 'Src/IOExp.o' failed
+make: *** [Src/IOExp.o] Error 1
+14:36:51 **** Incremental Build of configuration Debug for project STM32F103C8 ****
+make all 
+make: Nothing to be done for 'all'.
+14:36:51 **** Incremental Build of configuration Debug for project STM32RBT6 ****
+make all 
+Building file: ../Src/IOExp.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\STM32RBT6\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/IOExp.d" -MT"Src/IOExp.o" -o "Src/IOExp.o" "../Src/IOExp.c"
+../Src/IOExp.c: In function 'UI_INIT':
+../Src/IOExp.c:35:2: warning: implicit declaration of function 'SPI_Transmit'; did you mean 'HAL_SPI_Transmit'? [-Wimplicit-function-declaration]
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_1); // disable sequential mode, int polarity active high
+  ^~~~~~~~~~~~
+  HAL_SPI_Transmit
+../Src/IOExp.c:35:30: error: 'IO_EXP_1' undeclared (first use in this function); did you mean 'IOEXP_H_'?
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_1); // disable sequential mode, int polarity active high
+                              ^~~~~~~~
+                              IOEXP_H_
+../Src/IOExp.c:35:30: note: each undeclared identifier is reported only once for each function it appears in
+../Src/IOExp.c:47:30: error: 'IO_EXP_2' undeclared (first use in this function); did you mean 'IO_EXP_1'?
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_2); // disable sequential mode, int polarity active high
+                              ^~~~~~~~
+                              IO_EXP_1
+make: *** [Src/IOExp.o] Error 1
+Src/subdir.mk:42: recipe for target 'Src/IOExp.o' failed

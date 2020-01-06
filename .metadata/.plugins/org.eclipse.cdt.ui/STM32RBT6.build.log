@@ -1,0 +1,25 @@
+14:36:51 **** Incremental Build of configuration Debug for project STM32RBT6 ****
+make all 
+Building file: ../Src/IOExp.c
+Invoking: MCU GCC Compiler
+C:\Users\Ruben\Documents\School\2019-2020\MNLE-Synth\MNLE-SOFTWARE\STM32F103C8\STM32RBT6\Debug
+arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F103xB -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/STM32F1xx_HAL_Driver/Inc" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/CMSIS/Device/ST/STM32F1xx/Include" -I"C:/Users/Ruben/Documents/School/2019-2020/MNLE-Synth/MNLE-SOFTWARE/STM32F103C8/STM32RBT6/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/IOExp.d" -MT"Src/IOExp.o" -o "Src/IOExp.o" "../Src/IOExp.c"
+../Src/IOExp.c: In function 'UI_INIT':
+../Src/IOExp.c:35:2: warning: implicit declaration of function 'SPI_Transmit'; did you mean 'HAL_SPI_Transmit'? [-Wimplicit-function-declaration]
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_1); // disable sequential mode, int polarity active high
+  ^~~~~~~~~~~~
+  HAL_SPI_Transmit
+../Src/IOExp.c:35:30: error: 'IO_EXP_1' undeclared (first use in this function); did you mean 'IOEXP_H_'?
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_1); // disable sequential mode, int polarity active high
+                              ^~~~~~~~
+                              IOEXP_H_
+../Src/IOExp.c:35:30: note: each undeclared identifier is reported only once for each function it appears in
+../Src/IOExp.c:47:30: error: 'IO_EXP_2' undeclared (first use in this function); did you mean 'IO_EXP_1'?
+  SPI_Transmit(IOCON_A ,0x20, IO_EXP_2); // disable sequential mode, int polarity active high
+                              ^~~~~~~~
+                              IO_EXP_1
+make: *** [Src/IOExp.o] Error 1
+Src/subdir.mk:42: recipe for target 'Src/IOExp.o' failed
+
+14:36:52 Build Finished (took 705ms)
+
