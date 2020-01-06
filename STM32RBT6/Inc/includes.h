@@ -26,7 +26,8 @@
 */
 
 #include "midi.h"
-#include <IOExp.h>
+#include "IOExp.h"
+#include "SPI.h"
 #include "main.h"
 #include "YM3812.h"
 #include "stm32f1xx_hal.h"
