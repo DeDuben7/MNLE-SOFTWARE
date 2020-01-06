@@ -67,9 +67,9 @@ void Error_Handler(void);
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
 
-I2C_HandleTypeDef hi2c2;
+SPI_HandleTypeDef hspi1;
 
-SPI_HandleTypeDef hspi2;
+TIM_HandleTypeDef htim1;
 
 UART_HandleTypeDef huart2;
 

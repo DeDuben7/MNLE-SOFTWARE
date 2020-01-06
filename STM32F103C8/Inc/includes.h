@@ -26,7 +26,8 @@
 */
 
 #include "midi.h"
-#include <IOExp.h>
+#include "IOExp.h"
+#include "SPI.h"
 #include "main.h"
 #include "YM3812.h"
 #include "stm32f1xx_hal.h"
@@ -42,8 +43,9 @@
 #define TRUE			1
 #define FALSE			0
 
-
-#endif
+#define LCD 0
+#define IO_EXP_1 1
+#define IO_EXP_2 2
 
 /*
 *********************************************************************************************************
@@ -59,3 +61,4 @@
 *********************************************************************************************************
 */
 
+#endif

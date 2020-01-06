@@ -47,38 +47,12 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
 
-I2C_HandleTypeDef hi2c2;
-
-SPI_HandleTypeDef hspi2;
-
-UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 uint8_t ReceiveFlag = FALSE;
 uint8_t data;
 
-uint8_t AIODIR		=	0x00;
-uint8_t AIPOL		=	0x02;
-uint8_t AGPINTEN 	=	0x04;
-uint8_t AIOCON		=	0x08;
-uint8_t AGPPU		=	0x0C;
-uint8_t AINTF		=	0x0E;
-uint8_t AINTCAP 	=	0x10;
-uint8_t AGPIO		=	0x12;	//outputs schrijven
-uint8_t AOLAT 		=	0x14;
-uint8_t OPCODE		=	0x4100;
-
-uint8_t IODIR 		= 0;
-uint8_t IPOL  		= 0;
-uint8_t GPINTEN 	= 0;
-uint8_t IOCON 		= 56; //0011 1000
-uint8_t GPPU 		= 0;
-uint8_t INTF 		= 0;
-uint8_t INTCAP 		= 0;
-uint8_t GPIO_ON		= 1;
-uint8_t GPIO_OFF	= 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -86,8 +60,8 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_USART2_UART_Init(void);
-static void MX_I2C2_Init(void);
-static void MX_SPI2_Init(void);
+static void MX_SPI1_Init(void);
+static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
 void GPIO_Init(void);
 
@@ -95,6 +69,9 @@ void GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+
+
 
 /* USER CODE END 0 */
 
@@ -104,75 +81,53 @@ void GPIO_Init(void);
   */
 int main(void)
 {
-	/* USER CODE BEGIN 1 */
+  /* USER CODE BEGIN 1 */
 
-	/* USER CODE END 1 */
+  /* USER CODE END 1 */
+  
 
+  /* MCU Configuration--------------------------------------------------------*/
 
-	/* MCU Configuration--------------------------------------------------------*/
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
 
-	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
+  /* USER CODE BEGIN Init */
 
-	/* USER CODE BEGIN Init */
+  /* USER CODE END Init */
 
-	/* USER CODE END Init */
+  /* Configure the system clock */
+  SystemClock_Config();
 
-	/* Configure the system clock */
-	SystemClock_Config();
+  /* USER CODE BEGIN SysInit */
 
-	/* USER CODE BEGIN SysInit */
+  /* USER CODE END SysInit */
 
-	/* USER CODE END SysInit */
-
-	/* Initialize all configured peripherals */
-	MX_GPIO_Init();
-	//MX_ADC1_Init();
-	MX_USART2_UART_Init();
-	MX_I2C2_Init();
-	MX_SPI2_Init();
-
-	/* USER CODE BEGIN 2 */
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_ADC1_Init();
+  MX_USART2_UART_Init();
+  MX_SPI1_Init();
+  MX_TIM1_Init();
+  /* USER CODE BEGIN 2 */
 	GPIO_Init();
-	YM_RESET();  // reset the YM3812 chips
-	YM_SET_Def(); // set the default settings for the YM3812 chips
-	HAL_Delay(200);
-	HAL_UART_Receive_IT(&huart2, &data, 1); // enable the receive under interrupt mode for UART2
+	//YM_RESET();  // reset the YM3812 chips
+	//YM_SET_Def(); // set the default settings for the YM3812 chips
+	//HAL_Delay(200);
+	//HAL_UART_Receive_IT(&huart2, &data, 1); // enable the receive under interrupt mode for UART2
 
-	int SPI_Dat;
-	SPI_Dat = OPCODE | AIODIR;
+  /* USER CODE END 2 */
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
 
-	HAL_SPI_Transmit_IT(&hspi2, &SPI_Dat, 2);
-	HAL_SPI_Transmit_IT(&hspi2, &IODIR, 2);
-
-	SPI_Dat = OPCODE | AIOCON;
-	HAL_SPI_Transmit_IT(&hspi2, &SPI_Dat, 2);
-	HAL_SPI_Transmit_IT(&hspi2, &IOCON, 2);
-	/* USER CODE END 2 */
-
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
 	while (1)
 	{
-		if(ReceiveFlag) // if the receiveflag is set, reset the flag and call the MIDI_PROC function
-		{
-			ReceiveFlag = FALSE;
-			MIDI_PROC(data);
 
-			HAL_SPI_Transmit_IT(&hspi2, &AGPIO, 2);
-			HAL_SPI_Transmit_IT(&hspi2, &GPIO_ON, 2);
-			HAL_Delay(100);
-			HAL_SPI_Transmit_IT(&hspi2, &AGPIO, 2);
-			HAL_SPI_Transmit_IT(&hspi2, &GPIO_OFF, 2);
-			HAL_Delay(100);
+    /* USER CODE END WHILE */
 
-		}
-	/* USER CODE END WHILE */
-
-	/* USER CODE BEGIN 3 */
+    /* USER CODE BEGIN 3 */
 
 	}
-	/* USER CODE END 3 */
+  /* USER CODE END 3 */
 }
 
 /**
@@ -265,74 +220,90 @@ static void MX_ADC1_Init(void)
 }
 
 /**
-  * @brief I2C2 Initialization Function
+  * @brief SPI1 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_I2C2_Init(void)
+static void MX_SPI1_Init(void)
 {
 
-  /* USER CODE BEGIN I2C2_Init 0 */
+  /* USER CODE BEGIN SPI1_Init 0 */
 
-  /* USER CODE END I2C2_Init 0 */
+  /* USER CODE END SPI1_Init 0 */
 
-  /* USER CODE BEGIN I2C2_Init 1 */
+  /* USER CODE BEGIN SPI1_Init 1 */
 
-  /* USER CODE END I2C2_Init 1 */
-  hi2c2.Instance = I2C2;
-  hi2c2.Init.ClockSpeed = 100000;
-  hi2c2.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c2.Init.OwnAddress1 = 0;
-  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c2.Init.OwnAddress2 = 0;
-  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
+  /* USER CODE END SPI1_Init 1 */
+  /* SPI1 parameter configuration*/
+  hspi1.Instance = SPI1;
+  hspi1.Init.Mode = SPI_MODE_MASTER;
+  hspi1.Init.Direction = SPI_DIRECTION_2LINES;
+  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
+  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi1.Init.NSS = SPI_NSS_SOFT;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;
+  hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
+  hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+  hspi1.Init.CRCPolynomial = 10;
+  if (HAL_SPI_Init(&hspi1) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN I2C2_Init 2 */
-
-  /* USER CODE END I2C2_Init 2 */
+  /* USER CODE BEGIN SPI1_Init 2 */
+  HAL_NVIC_SetPriority(SPI1_IRQn, 1, 1); //<--------------------
+  HAL_NVIC_EnableIRQ(SPI1_IRQn);
+  /* USER CODE END SPI1_Init 2 */
 
 }
 
 /**
-  * @brief SPI2 Initialization Function
+  * @brief TIM1 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_SPI2_Init(void)
+static void MX_TIM1_Init(void)
 {
 
-  /* USER CODE BEGIN SPI2_Init 0 */
+  /* USER CODE BEGIN TIM1_Init 0 */
 
-  /* USER CODE END SPI2_Init 0 */
+  /* USER CODE END TIM1_Init 0 */
 
-  /* USER CODE BEGIN SPI2_Init 1 */
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_IC_InitTypeDef sConfigIC = {0};
 
-  /* USER CODE END SPI2_Init 1 */
-  /* SPI2 parameter configuration*/
-  hspi2.Instance = SPI2;
-  hspi2.Init.Mode = SPI_MODE_MASTER;
-  hspi2.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi2.Init.DataSize = SPI_DATASIZE_8BIT;
-  hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi2.Init.NSS = SPI_NSS_SOFT;
-  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-  hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
-  hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
-  hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-  hspi2.Init.CRCPolynomial = 10;
-  if (HAL_SPI_Init(&hspi2) != HAL_OK)
+  /* USER CODE BEGIN TIM1_Init 1 */
+
+  /* USER CODE END TIM1_Init 1 */
+  htim1.Instance = TIM1;
+  htim1.Init.Prescaler = 0;
+  htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim1.Init.Period = 0;
+  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim1.Init.RepetitionCounter = 0;
+  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_IC_Init(&htim1) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN SPI2_Init 2 */
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+  sConfigIC.ICFilter = 0;
+  if (HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM1_Init 2 */
 
-  /* USER CODE END SPI2_Init 2 */
+  /* USER CODE END TIM1_Init 2 */
 
 }
 
@@ -454,22 +425,19 @@ void GPIO_Init()
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-	//SPI
-	GPIO_InitStruct.Pin = GPIO_PIN_15 | GPIO_PIN_14 | GPIO_PIN_13;
-	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
 	//YM_RST
 	GPIO_InitStruct.Pin = GPIO_PIN_8;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+	GPIO_InitStruct.Pin = GPIO_PIN_14;
+	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
 	//YM3812 PINS PART 1
-	GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_12;
+	GPIO_InitStruct.Pin = GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_12 | GPIO_PIN_13;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
@@ -482,7 +450,7 @@ void GPIO_Init()
 	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-	//LED PIN - Voor nu pinnen d0-d1 vor YM aansturing
+	//LED PIN - Voor nu pinnen d0-d1 voor YM aansturing
 	GPIO_InitStruct.Pin = GPIO_PIN_13 | GPIO_PIN_14;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -501,12 +469,10 @@ void USART2_IRQHandler(void)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	if (huart->Instance == USART2)
-	{
-		ReceiveFlag = TRUE;						// set the receiveflag
-		HAL_UART_Receive_IT(&huart2, &data, 1); // enable receive under interrupt mode again
-	}
+	ReceiveFlag = TRUE;						// set the receiveflag
+	HAL_UART_Receive_IT(&huart2, &data, 1); // enable receive under interrupt mode again
 }
+
 
 /* USER CODE END 4 */
 
