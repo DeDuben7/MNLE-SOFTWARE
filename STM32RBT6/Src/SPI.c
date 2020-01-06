@@ -13,19 +13,22 @@
 
 #include "includes.h"
 
-uint8_t SPI_DATA_RX;			/**<  */
-uint8_t OPCODE_WRITE = 0x40;	/**<  */
-uint8_t OPCODE_READ = 0x41;		/**<  */
+uint8_t SPI_DATA_RX;			/**< Byte for the SPI RX data */
+uint8_t OPCODE_WRITE = 0x40;	/**< Opcode for writing data to an IO expander */
+uint8_t OPCODE_READ = 0x41;		/**< Opcode for reading data from an IO expander */
 
 /**
   ******************************************************************************
-  * @brief			The application entry point.
-  * @headerfile x.h ""
-  * @param 			None
-  * @val
-  * @return None
+  * @brief			SPI transmit function.
+  * @headerfile 	includes.h ""
+  * @param 			8 bit address variable
+  * @param 			8 bit data variable
+  * @param 			8 bit device variable
+  * @val			None
+  * @return None	iError
   ******************************************************************************
-  * @details
+  * @details		This function transmits an SPI message to a specified IO
+  * 				expander.
   ******************************************************************************
   */
 uint8_t SPI_Transmit(uint8_t addr, uint8_t data, uint8_t device)
@@ -54,13 +57,15 @@ uint8_t SPI_Transmit(uint8_t addr, uint8_t data, uint8_t device)
 
 /**
   ******************************************************************************
-  * @brief			The application entry point.
-  * @headerfile x.h ""
-  * @param 			None
-  * @val
-  * @return None
+  * @brief			SPI receive function.
+  * @headerfile 	includes.h ""
+  * @param 			8 bit address variable
+  * @param 			8 bit device variable
+  * @val			None
+  * @return			iError
   ******************************************************************************
-  * @details
+  * @details		This function reads a byte of data from a specified
+  * 				IO expander.
   ******************************************************************************
   */
 uint8_t SPI_Receive(uint8_t addr, uint8_t device)

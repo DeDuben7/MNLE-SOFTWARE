@@ -36,11 +36,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;		/**< handle for adc functions */
 
-SPI_HandleTypeDef hspi2;		/**< handle for spi functions */
-
-UART_HandleTypeDef huart3;		/**< handle for the uart function */
 
 /* USER CODE BEGIN PV */
 uint8_t ReceiveFlag = FALSE;	/**< flag to indicate whether a uart message is received */
@@ -66,12 +62,13 @@ static void MX_USART3_UART_Init(void);
 /**
   ******************************************************************************
   * @brief			The application entry point.
-  * @headerfile x.h ""
+  * @headerfile 	includes.h ""
   * @param 			None
-  * @val
-  * @return None
+  * @val			None
+  * @return 		None
   ******************************************************************************
-  * @details
+  * @details		This is the main function from which the software runs.
+  * 				The main function contains all the needed initializations
   ******************************************************************************
   */
 int main(void)
@@ -103,17 +100,15 @@ int main(void)
   MX_SPI2_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-    YM_RESET();  // reset the YM3812 chips
-  	YM_SET_Def(); // set the default settings for the YM3812 chips
-  	HAL_Delay(200);
-  	HAL_UART_Receive_IT(&huart3, &data, 1); // enable the receive under interrupt mode for UART2
-  	// Setting YM_CS pins
-    HAL_GPIO_WritePin(GPIOC,YM_CS_2|YM_CS_3|YM_CS_4,GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIOA, YM_CS_1 ,GPIO_PIN_SET);
 
+  YM_RESET();  // reset the YM3812 chips
+  YM_SET_Def(); // set the default settings for the YM3812 chips
+  HAL_Delay(200);
+  HAL_UART_Receive_IT(&huart3, &data, 1); // enable the receive under interrupt mode for UART2
+  // Setting YM_CS pins
+  HAL_GPIO_WritePin(GPIOC,YM_CS_2|YM_CS_3|YM_CS_4,GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, YM_CS_1 ,GPIO_PIN_SET);
 
-//    YM_PITCH(40,50);
-//    YM_NOTE_ON(1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -121,11 +116,11 @@ int main(void)
   while (1)
   {
 	  if(ReceiveFlag) // if the receiveflag is set, reset the flag and call the MIDI_PROC function
-	  		{
-	  			ReceiveFlag = FALSE;
-	  			MIDI_PROC(data);
-	  			HAL_GPIO_WritePin(GPIOC, IO_1, GPIO_PIN_SET);
-	  		}
+	  {
+		  ReceiveFlag = FALSE;
+		  MIDI_PROC(data);
+		  HAL_GPIO_WritePin(GPIOC, IO_1, GPIO_PIN_SET);
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -135,13 +130,13 @@ int main(void)
 
 /**
   ******************************************************************************
-  * @brief			The application entry point.
-  * @headerfile x.h ""
+  * @brief			System clock configuration.
+  * @headerfile 	includes.h ""
   * @param 			None
-  * @val
-  * @return None
+  * @val			None
+  * @return None    None
   ******************************************************************************
-  * @details
+  * @details		This function configures the system clock to the right speeds.
   ******************************************************************************
   */
 void SystemClock_Config(void)
@@ -186,13 +181,13 @@ void SystemClock_Config(void)
 
 /**
   ******************************************************************************
-  * @brief			The application entry point.
-  * @headerfile x.h ""
+  * @brief			ADC configuration.
+  * @headerfile 	includes.h ""
   * @param 			None
-  * @val
-  * @return None
+  * @val			None
+  * @return None	None
   ******************************************************************************
-  * @details
+  * @details		This function configures the ADC.
   ******************************************************************************
   */
 static void MX_ADC1_Init(void)
@@ -243,13 +238,13 @@ static void MX_ADC1_Init(void)
 
 /**
   ******************************************************************************
-  * @brief			The application entry point.
-  * @headerfile x.h ""
+  * @brief			SPI configuration.
+  * @headerfile 	includes.h ""
   * @param 			None
-  * @val
-  * @return None
+  * @val			None
+  * @return None	None
   ******************************************************************************
-  * @details
+  * @details		This function configures the right SPI bus for usage.
   ******************************************************************************
   */
 static void MX_SPI2_Init(void)
@@ -287,13 +282,13 @@ static void MX_SPI2_Init(void)
 
 /**
   ******************************************************************************
-  * @brief			The application entry point.
-  * @headerfile x.h ""
+  * @brief			UART configuration.
+  * @headerfile 	includes.h ""
   * @param 			None
-  * @val
-  * @return None
+  * @val			None
+  * @return None	None
   ******************************************************************************
-  * @details
+  * @details		This function configures the right UART bus for usage.
   ******************************************************************************
   */
 static void MX_USART3_UART_Init(void)
@@ -327,13 +322,14 @@ static void MX_USART3_UART_Init(void)
 
 /**
   ******************************************************************************
-  * @brief			The application entry point.
-  * @headerfile x.h ""
+  * @brief			GPIO configuration.
+  * @headerfile		includes.h ""
   * @param 			None
-  * @val
-  * @return None
+  * @val			None
+  * @return None	None
   ******************************************************************************
-  * @details
+  * @details		This functionn configures the right GPIO pins
+  * 				with the right settings.
   ******************************************************************************
   */
 static void MX_GPIO_Init(void)
@@ -405,13 +401,14 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 /**
   ******************************************************************************
-  * @brief			The application entry point.
-  * @headerfile x.h ""
+  * @brief			Interrupt handler.
+  * @headerfile 	includes.h ""
   * @param 			None
-  * @val
-  * @return None
+  * @val			None
+  * @return None	None
   ******************************************************************************
-  * @details
+  * @details		This function handles UART interrupts and calls the
+  * 				callback function.
   ******************************************************************************
   */
 void USART3_IRQHandler(void)
@@ -421,13 +418,14 @@ void USART3_IRQHandler(void)
 
 /**
   ******************************************************************************
-  * @brief			The application entry point.
-  * @headerfile x.h ""
+  * @brief			UART callback function.
+  * @headerfile 	includes.h ""
   * @param 			None
-  * @val
-  * @return None
+  * @val			None
+  * @return None	None
   ******************************************************************************
-  * @details
+  * @details		This function is called by the UART interrupt handler and
+  * 				sets the receive flag.
   ******************************************************************************
   */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
@@ -442,13 +440,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 /**
   ******************************************************************************
-  * @brief			The application entry point.
-  * @headerfile x.h ""
+  * @brief			Error handler.
+  * @headerfile 	includes.h ""
   * @param 			None
-  * @val
-  * @return None
+  * @val			None
+  * @return None	None
   ******************************************************************************
-  * @details
+  * @details		This function is called when an error occurs. It will show
+  * 				the error on the LCD.
   ******************************************************************************
   */
 void Error_Handler(void)

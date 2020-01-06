@@ -13,8 +13,8 @@
 #ifndef SPI_H_
 #define SPI_H_
 
-#define IO_EXP_1 0
-#define IO_EXP_2 1
+#define IO_EXP_1 0				/**< define for IO expander 1 */
+#define IO_EXP_2 1				/**< define for IO expander 2 */
 
 uint8_t SPI_Transmit(uint8_t addr, uint8_t data, uint8_t device);
 uint8_t SPI_Receive(uint8_t addr, uint8_t device);
