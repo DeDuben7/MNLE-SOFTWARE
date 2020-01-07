@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
   * @file			SPI.c
-  * @brief        	Header for main.c file.
-  *               	This file contains the common defines of the application.
+  * @brief        	Handles SPI communications
   * @version		V1.00
   * @authors		Oehlers, van Renswoude and Schotborgh
   * @date			06-01-2020
@@ -18,18 +17,14 @@ uint8_t OPCODE_WRITE = 0x40;	/**< Opcode for writing data to an IO expander */
 uint8_t OPCODE_READ = 0x41;		/**< Opcode for reading data from an IO expander */
 
 /**
-  ******************************************************************************
-  * @brief			SPI transmit function.
-  * @headerfile 	includes.h ""
-  * @param 			8 bit address variable
-  * @param 			8 bit data variable
-  * @param 			8 bit device variable
-  * @val			None
-  * @return None	iError
-  ******************************************************************************
-  * @details		This function transmits an SPI message to a specified IO
-  * 				expander.
-  ******************************************************************************
+  * @fn			uint8_t SPI_Transmit(uint8_t addr, uint8_t data, uint8_t device)
+  * @brief		SPI transmit function.
+  * @details	This function transmits an SPI message to a specified IO
+  * 			expander.
+  * @param 		addr	eight bit value with the adress for transmiting the data
+  * @param 		data	eight bit value with the data to be transmitted
+  * @param 		device	eight bit value with the device that needs to recieve the data
+  * @return 	iError
   */
 uint8_t SPI_Transmit(uint8_t addr, uint8_t data, uint8_t device)
 {
@@ -56,17 +51,13 @@ uint8_t SPI_Transmit(uint8_t addr, uint8_t data, uint8_t device)
 }
 
 /**
-  ******************************************************************************
-  * @brief			SPI receive function.
-  * @headerfile 	includes.h ""
-  * @param 			8 bit address variable
-  * @param 			8 bit device variable
-  * @val			None
-  * @return			iError
-  ******************************************************************************
-  * @details		This function reads a byte of data from a specified
-  * 				IO expander.
-  ******************************************************************************
+  * @fn			uint8_t SPI_Receive(uint8_t addr, uint8_t device)
+  * @brief		SPI receive function.
+  * @details	This function reads a byte of data from a specified
+  * 			IO expander.
+  * @param 		addr	eight bit value with the addres for recieving data
+  * @param 		device	eight bit value with the device ID for recieving data
+  * @return		iError
   */
 uint8_t SPI_Receive(uint8_t addr, uint8_t device)
 {

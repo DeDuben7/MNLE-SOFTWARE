@@ -60,16 +60,10 @@ static void MX_USART3_UART_Init(void);
 /* USER CODE END 0 */
 
 /**
-  ******************************************************************************
-  * @brief			The application entry point.
-  * @headerfile 	includes.h ""
-  * @param 			None
-  * @val			None
-  * @return 		None
-  ******************************************************************************
-  * @details		This is the main function from which the software runs.
-  * 				The main function contains all the needed initializations
-  ******************************************************************************
+  * @fn			int main(void)
+  * @brief		The application entry point.
+  * @details	This is the main function from which the software runs.
+  * 			The main function contains all the needed initializations
   */
 int main(void)
 {
@@ -129,15 +123,9 @@ int main(void)
 }
 
 /**
-  ******************************************************************************
-  * @brief			System clock configuration.
-  * @headerfile 	includes.h ""
-  * @param 			None
-  * @val			None
-  * @return None    None
-  ******************************************************************************
-  * @details		This function configures the system clock to the right speeds.
-  ******************************************************************************
+  * @fn			void SystemClock_Config(void)
+  * @brief		System clock configuration.
+  * @details	This function configures the system clock to the right speeds.
   */
 void SystemClock_Config(void)
 {
@@ -180,15 +168,9 @@ void SystemClock_Config(void)
 }
 
 /**
-  ******************************************************************************
-  * @brief			ADC configuration.
-  * @headerfile 	includes.h ""
-  * @param 			None
-  * @val			None
-  * @return None	None
-  ******************************************************************************
-  * @details		This function configures the ADC.
-  ******************************************************************************
+  * @fn			static void MX1_ADC1_Init(void)
+  * @brief		ADC configuration.
+  * @details	This function configures the ADC.
   */
 static void MX_ADC1_Init(void)
 {
@@ -237,15 +219,9 @@ static void MX_ADC1_Init(void)
 }
 
 /**
-  ******************************************************************************
-  * @brief			SPI configuration.
-  * @headerfile 	includes.h ""
-  * @param 			None
-  * @val			None
-  * @return None	None
-  ******************************************************************************
-  * @details		This function configures the right SPI bus for usage.
-  ******************************************************************************
+  * @fn			static void MX_SPI2_Init(void)
+  * @brief		SPI configuration.
+  * @details	This function configures the right SPI bus for usage.
   */
 static void MX_SPI2_Init(void)
 {
@@ -281,15 +257,9 @@ static void MX_SPI2_Init(void)
 }
 
 /**
-  ******************************************************************************
-  * @brief			UART configuration.
-  * @headerfile 	includes.h ""
-  * @param 			None
-  * @val			None
-  * @return None	None
-  ******************************************************************************
-  * @details		This function configures the right UART bus for usage.
-  ******************************************************************************
+  * @fn			static void MX_USART3_UART_Init(void)
+  * @brief		UART configuration.
+  * @details	This function configures the right UART bus for usage.
   */
 static void MX_USART3_UART_Init(void)
 {
@@ -321,16 +291,10 @@ static void MX_USART3_UART_Init(void)
 }
 
 /**
-  ******************************************************************************
-  * @brief			GPIO configuration.
-  * @headerfile		includes.h ""
-  * @param 			None
-  * @val			None
-  * @return None	None
-  ******************************************************************************
-  * @details		This functionn configures the right GPIO pins
-  * 				with the right settings.
-  ******************************************************************************
+  * @fn			static void MX_GPIO_Init(void)
+  * @brief		GPIO configuration.
+  * @details	This functionn configures the right GPIO pins
+  * 			with the right settings.
   */
 static void MX_GPIO_Init(void)
 {
@@ -400,16 +364,10 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 /**
-  ******************************************************************************
-  * @brief			Interrupt handler.
-  * @headerfile 	includes.h ""
-  * @param 			None
-  * @val			None
-  * @return None	None
-  ******************************************************************************
-  * @details		This function handles UART interrupts and calls the
-  * 				callback function.
-  ******************************************************************************
+  * @fn			void USART_IRQHandler(void)
+  * @brief		Interrupt handler.
+  * @details	This function handles UART interrupts and calls the
+  * 			callback function.
   */
 void USART3_IRQHandler(void)
 {
@@ -417,16 +375,10 @@ void USART3_IRQHandler(void)
 }
 
 /**
-  ******************************************************************************
-  * @brief			UART callback function.
-  * @headerfile 	includes.h ""
-  * @param 			None
-  * @val			None
-  * @return None	None
-  ******************************************************************************
-  * @details		This function is called by the UART interrupt handler and
-  * 				sets the receive flag.
-  ******************************************************************************
+  * @fn			void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+  * @brief		UART callback function.
+  * @details	This function is called by the UART interrupt handler and
+  * 			sets the receive flag.
   */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
@@ -436,19 +388,26 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		HAL_UART_Receive_IT(&huart3, &data, 1); // enable receive under interrupt mode again
 	}
 }
+
+/**
+ *@mainpage 				RETROSYNTH
+ * @section intro_sec		Introduction
+ *							This Doxygen is for the people who want to recreate the RETROSYNTH.
+ *							The doxygen is dedicated to explain the software. There will be extra comments in the software itself.
+ *							Good luck on recreating!
+ *
+ *							Regards,
+ *
+ *							Oehlers, van Renswoude and Schotborgh
+ */
+
 /* USER CODE END 4 */
 
 /**
-  ******************************************************************************
-  * @brief			Error handler.
-  * @headerfile 	includes.h ""
-  * @param 			None
-  * @val			None
-  * @return None	None
-  ******************************************************************************
-  * @details		This function is called when an error occurs. It will show
-  * 				the error on the LCD.
-  ******************************************************************************
+  * @fn			void Error_Handler(void)
+  * @brief		Error handler.
+  * @details	This function is called when an error occurs. It will show
+  * 			the error on the LCD.
   */
 void Error_Handler(void)
 {

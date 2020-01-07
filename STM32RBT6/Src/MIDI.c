@@ -3,7 +3,7 @@
   *
   * @file			MIDI.c
   * @brief			Filters incoming MIDI messages.
-  * @version			V2.0
+  * @version		V2.0
   * @authors  		Schotborgh, Oehlers en van Renswoude
   * @date			25-10-19
   ******************************************************************************
@@ -11,6 +11,7 @@
   * 					When filterd it will send the messages to the corresponding function.
   ******************************************************************************
 */
+
 
 
 #include "includes.h"
@@ -28,13 +29,12 @@ uint8_t NOTE_CONT_CHANGE_FLAG;	/**< value made for flagging control change*/
 uint8_t NOTE_PITCH_CHANGE_FLAG;	/**< value made for flagging pitch change */
 
 /**
+  * @fn				uint8_t MIDI_PROC(uint8_t MIDI_MSG)
   * @brief 			Function for processing MIDI messages
-  * @headerfile 	includes.h ""
-  * @param 			MIDI_MSG is an eight bit integer wich is a byte of the incoming MIDI message
-  * @val			None
-  * @return			iError
   * @details 		Checks if incoming message is first or second byte. If first byte, it will check wich function and post a corresponding flag.
   * 		 		If second byte, checks wich flag is posted and sends the data array to corresponding function.
+  * @param 			MIDI_MSG is an eight bit integer wich is a byte of the incoming MIDI message
+  * @return			iError
   */
 uint8_t MIDI_PROC(uint8_t MIDI_MSG)
 {

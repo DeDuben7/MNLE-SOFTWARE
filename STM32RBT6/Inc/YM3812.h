@@ -10,8 +10,8 @@
 #include "includes.h"
 
 
-#define ON 	1
-#define OFF 0
+#define ON 	1	/**< Defines On 	to 	1 */
+#define OFF 0	/**< Defines Off to 	0 */
 
 //Function declarations for the YM3812
 uint8_t YM_WRITE_Databus(uint8_t chips, uint8_t adress, uint8_t data);
