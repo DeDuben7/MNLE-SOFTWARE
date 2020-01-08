@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['scalinglevel_76',['ScalingLevel',['../struct_operator.html#abcf8d025c2fb0f10560ae48c7774c6df',1,'Operator']]],
+  ['spi_2ec_77',['SPI.c',['../_s_p_i_8c.html',1,'']]],
+  ['spi_2eh_78',['SPI.h',['../_s_p_i_8h.html',1,'']]],
+  ['spi_5fdata_5frx_79',['SPI_DATA_RX',['../_s_p_i_8c.html#afe3f6e8d610c912d39ec5507f0565b92',1,'SPI.c']]],
+  ['spi_5fint_5fa_5f1_80',['SPI_INT_A_1',['../main_8h.html#a95215bc4771c900d7f880d7ee60e3497',1,'main.h']]],
+  ['spi_5fint_5fa_5f1_5fgpio_5fport_81',['SPI_INT_A_1_GPIO_Port',['../main_8h.html#a2942c9564e9bbc7444e9a0d48a233f32',1,'main.h']]],
+  ['spi_5fint_5fa_5f2_82',['SPI_INT_A_2',['../main_8h.html#a261c6a0ed4cb711df366c2c5cc3fbb97',1,'main.h']]],
+  ['spi_5fint_5fa_5f2_5fgpio_5fport_83',['SPI_INT_A_2_GPIO_Port',['../main_8h.html#acf4657188a6144193ff6177c1b9c1cf6',1,'main.h']]],
+  ['spi_5fint_5fb_5f1_84',['SPI_INT_B_1',['../main_8h.html#a84ee0315e63fa772bc68e2a3e8097e40',1,'main.h']]],
+  ['spi_5fint_5fb_5f1_5fgpio_5fport_85',['SPI_INT_B_1_GPIO_Port',['../main_8h.html#a58f608222ec6fd9b30eaf32eb9047b2b',1,'main.h']]],
+  ['spi_5fint_5fb_5f2_86',['SPI_INT_B_2',['../main_8h.html#a2ae1ebfd79a7d443437f8f4a265ae5db',1,'main.h']]],
+  ['spi_5fint_5fb_5f2_5fgpio_5fport_87',['SPI_INT_B_2_GPIO_Port',['../main_8h.html#a0af5a18b967ac4ac5099e4de3ef24d2b',1,'main.h']]],
+  ['spi_5flcd_5fcs_88',['SPI_LCD_CS',['../main_8h.html#a190c60676b5a2caeed3fe7a522a94230',1,'main.h']]],
+  ['spi_5flcd_5fcs_5fgpio_5fport_89',['SPI_LCD_CS_GPIO_Port',['../main_8h.html#a0aa30a8650a7b0125f43d6703813f3bd',1,'main.h']]],
+  ['spi_5fnss_5f1_90',['SPI_NSS_1',['../main_8h.html#a4033880cd734e9e53b5e7f4742c9cb26',1,'main.h']]],
+  ['spi_5fnss_5f1_5fgpio_5fport_91',['SPI_NSS_1_GPIO_Port',['../main_8h.html#a938e3dd10ec881836374e6e8772999fa',1,'main.h']]],
+  ['spi_5fnss_5f2_92',['SPI_NSS_2',['../main_8h.html#a50d4d1e038cf085cc932206892b8bfbf',1,'main.h']]],
+  ['spi_5fnss_5f2_5fgpio_5fport_93',['SPI_NSS_2_GPIO_Port',['../main_8h.html#afc758294aefebd380da364d3dfe7462d',1,'main.h']]],
+  ['spi_5freceive_94',['SPI_Receive',['../_s_p_i_8c.html#a398be011bdcf3c61d777f4087308784e',1,'SPI_Receive(uint8_t addr, uint8_t device):&#160;SPI.c'],['../_s_p_i_8h.html#a398be011bdcf3c61d777f4087308784e',1,'SPI_Receive(uint8_t addr, uint8_t device):&#160;SPI.c']]],
+  ['spi_5frst_95',['SPI_RST',['../main_8h.html#ab0c957dd9e111cb750a9342efee2b4a7',1,'main.h']]],
+  ['spi_5frst_5fgpio_5fport_96',['SPI_RST_GPIO_Port',['../main_8h.html#a58246bc361fc5140cde3e0ee3524e17c',1,'main.h']]],
+  ['spi_5ftransmit_97',['SPI_Transmit',['../_s_p_i_8c.html#a9de5405b0431309ebc24fad268aca4c0',1,'SPI_Transmit(uint8_t addr, uint8_t data, uint8_t device):&#160;SPI.c'],['../_s_p_i_8h.html#a9de5405b0431309ebc24fad268aca4c0',1,'SPI_Transmit(uint8_t addr, uint8_t data, uint8_t device):&#160;SPI.c']]],
+  ['sustain_98',['Sustain',['../struct_operator.html#a562fcce9ef6ea806f05d2e50c992275d',1,'Operator']]],
+  ['systemclock_5fconfig_99',['SystemClock_Config',['../main_8c.html#a70af21c671abfcc773614a9a4f63d920',1,'main.c']]]
+];
