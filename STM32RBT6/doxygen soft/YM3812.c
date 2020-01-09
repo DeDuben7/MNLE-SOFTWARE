@@ -11,7 +11,10 @@
  * 				Following are the different functions will be found here.
  ******************************************************************************
  */
-
+/**
+ * @addtogroup	YM
+ * @{
+ */
 
 
 #include "includes.h"
@@ -427,4 +430,7 @@ uint8_t iError;
 
 return iError;
 }
+ */
+/**
+ * @}
  */

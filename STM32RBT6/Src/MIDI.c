@@ -13,7 +13,10 @@
 */
 
 
-
+/**
+ * @addtogroup MIDI
+ * @{
+ */
 #include "includes.h"
 
 int i = 0;  			/**< integer for counting incominging bytes.*/
@@ -134,3 +137,6 @@ uint8_t MIDI_PROC(uint8_t MIDI_MSG)
 	}
 	return iError;
 }
+/**
+ * @}
+ */

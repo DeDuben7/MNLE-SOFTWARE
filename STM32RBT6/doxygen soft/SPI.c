@@ -9,7 +9,10 @@
   * @details
   ******************************************************************************
 */
-
+/**
+ * @addtogroup	SPI
+ * @{
+ */
 #include "includes.h"
 
 uint8_t SPI_DATA_RX;			/**< Byte for the SPI RX data */
@@ -82,4 +85,6 @@ uint8_t SPI_Receive(uint8_t addr, uint8_t device)
 
 	return iError;
 }
-
+/**
+ * @}
+ */

@@ -393,14 +393,28 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  *@mainpage 				RETROSYNTH
  * @section intro_sec		Introduction
  *							This Doxygen is for the people who want to recreate the RETROSYNTH.
- *							The doxygen is dedicated to explain the software. There will be extra comments in the software itself.
+ *							The doxygen is dedicated to explain the software. The software contains extra documantation.
+ *							For understanding the code, it is recommendend to have a basic know how of MIDI and SPI.
+ *							For hardware, please see the Hardware documentation.
+ *
  *							Good luck on recreating!
  *
  *							Regards,
  *
  *							Oehlers, van Renswoude and Schotborgh
  */
-
+/**
+ * @defgroup 	MIDI MIDI-software
+ * 				This is all the software for capturing MIDI-messages and filtering them by function.
+ */
+/**
+ * @defgroup	YM	YM-Software
+ * 				This is all the software to convert incoming MIDI-messages, from the midi software, into YM-protocol.
+ */
+/**
+ * @defgroup	SPI	SPI-Software
+ * 				This is all the software needed to communicate via SPI. The SPI is used for communication with the I/O-expander, that is used for the User Interface.
+ */
 /* USER CODE END 4 */
 
 /**

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: D:/School/MLNE/GIT-SOFT/STM32RBT6/doxygen soft/MIDI.h File Reference</title>
+<title>My Project: MIDI.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,10 +60,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_275089585c7fc1b5fd5d7d42c69cb1da.html">D:</a></li><li class="navelem"><a class="el" href="dir_8d1ca4586762d004ca3d4d8345229d64.html">School</a></li><li class="navelem"><a class="el" href="dir_26792b3f4ec30905414d74be72da801c.html">MLNE</a></li><li class="navelem"><a class="el" href="dir_029394e5449b8a7607cb281338c9f929.html">GIT-SOFT</a></li><li class="navelem"><a class="el" href="dir_39fdff600c60fa77adc17a6f303fbb20.html">STM32RBT6</a></li><li class="navelem"><a class="el" href="dir_b44474672a155ccb8c0122486f8277e4.html">doxygen soft</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -95,9 +91,9 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2dae9abb384726984fde5f703a171352"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_i_d_i_8h.html#a2dae9abb384726984fde5f703a171352">MIDI_PROC</a> (uint8_t MIDI_MSG)</td></tr>
-<tr class="memdesc:a2dae9abb384726984fde5f703a171352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for processing MIDI messages.  <a href="_m_i_d_i_8h.html#a2dae9abb384726984fde5f703a171352">More...</a><br /></td></tr>
-<tr class="separator:a2dae9abb384726984fde5f703a171352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2dae9abb384726984fde5f703a171352"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___m_i_d_i.html#ga2dae9abb384726984fde5f703a171352">MIDI_PROC</a> (uint8_t MIDI_MSG)</td></tr>
+<tr class="memdesc:ga2dae9abb384726984fde5f703a171352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for processing MIDI messages.  <a href="group___m_i_d_i.html#ga2dae9abb384726984fde5f703a171352">More...</a><br /></td></tr>
+<tr class="separator:ga2dae9abb384726984fde5f703a171352"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines voor <a class="el" href="_m_i_d_i_8c.html" title="Filters incoming MIDI messages.">MIDI.C</a>. </p>
@@ -178,34 +174,6 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Program change is recieved as bits 1100 </p>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a2dae9abb384726984fde5f703a171352"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dae9abb384726984fde5f703a171352">&#9670;&nbsp;</a></span>MIDI_PROC()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t MIDI_PROC </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>MIDI_MSG</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Function for processing MIDI messages. </p>
-<p>Checks if incoming message is first or second byte. If first byte, it will check wich function and post a corresponding flag. If second byte, checks wich flag is posted and sends the data array to corresponding function. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">MIDI_MSG</td><td>is an eight bit integer wich is a byte of the incoming MIDI message </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>iError </dd></dl>
 
 </div>
 </div>
