@@ -342,39 +342,50 @@ void YM_SET_Def()
 {
 	int i; // Counter variable
 
+	//int sound[11] = {0x07,0x4F,0xF2,0x60,0x00,0x08,0x12,0x00,0xF2,0x72,0x00}; //bells
+	int sound1[11] = {0x01,0x1D,0xF2,0xEF,0x00,0x0A,0x01,0x00,0xF5,0x78,0x00}; //bass1
+	//int sound[11] = {0xC1, 0x4F, 0xB1, 0x53, 0x03, 0x06, 0xE0, 0x00, 0x12, 0x74, 0x03}; //bass2
+	int sound[11] = {0x20, 0x90, 0xF1, 0x9E, 0x02, 0x0C, 0x11, 0x00, 0xF1, 0x5B, 0x03}; //epiano
+
 	YM_WRITE_Databus(1,0x01,0x20); // Enable multiple waveforms on chip 1
-	YM_WRITE_Databus(2,0x01,0x20); // Enable multiple waveforms on chip 2
+	//YM_WRITE_Databus(2,0x01,0x20); // Enable multiple waveforms on chip 2
 
 	// Set the default settings for chip 1
 	for(i=0;i<9;i++)
 	{
-		YM_WRITE_Databus(1,0x20 + op1[i],0x01); // set the multiplier to 1
-		YM_WRITE_Databus(1,0x40 + op1[i],0x00); // set the volume to the loudest volume possible
-		YM_WRITE_Databus(1,0x60 + op1[i],0xF0); // Set the attack to fast and the decay to slow
-		YM_WRITE_Databus(1,0x80 + op1[i],0x77); // Set the sustain and release to medium
-		YM_WRITE_Databus(1,0xE0 + op1[i],0x00); // Set the waveform to a kind of sawtooth wave
+		YM_WRITE_Databus(1,0x20 + op1[i],sound[0]); // set the multiplier to 1
+		YM_WRITE_Databus(1,0x40 + op1[i],sound[1]); // set the volume to the loudest volume possible
+		YM_WRITE_Databus(1,0x60 + op1[i],sound[2]); // Set the attack to fast and the decay to slow
+		YM_WRITE_Databus(1,0x80 + op1[i],sound[3]); // Set the sustain and release to medium
+		YM_WRITE_Databus(1,0xE0 + op1[i],sound[4]); // Set the waveform to a kind of sawtooth wave
 
-		YM_WRITE_Databus(1,0x20 + op2[i],0x01); // set the multiplier to 1
-		YM_WRITE_Databus(1,0x40 + op2[i],0x00); // set the volume to the loudest volume possible
-		YM_WRITE_Databus(1,0x60 + op2[i],0xF0); // Set the attack to fast and the decay to slow
-		YM_WRITE_Databus(1,0x80 + op2[i],0x77); // Set the sustain and release to medium
-		YM_WRITE_Databus(1,0xE0 + op2[i],0x00); // Set the waveform to a kind of sawtooth wave
+		YM_WRITE_Databus(1,0xC0 + i,sound[5]); // Set the waveform to a kind of sawtooth wave
+
+		YM_WRITE_Databus(1,0x20 + op2[i],sound[6]); // set the multiplier to 1
+		YM_WRITE_Databus(1,0x40 + op2[i],sound[7]); // set the volume to the loudest volume possible
+		YM_WRITE_Databus(1,0x60 + op2[i],sound[8]); // Set the attack to fast and the decay to slow
+		YM_WRITE_Databus(1,0x80 + op2[i],sound[9]); // Set the sustain and release to medium
+		YM_WRITE_Databus(1,0xE0 + op2[i],sound[10]); // Set the waveform to a kind of sawtooth wave
+
+
 	}
 
 	// Set the default settings for chip 2
 	for(i=0;i<9;i++)
 	{
-		YM_WRITE_Databus(2,0x20 + op1[i],0x01); // set the multiplier to 1
-		YM_WRITE_Databus(2,0x40 + op1[i],0x00); // set the volume to the loudest volume possible
-		YM_WRITE_Databus(2,0x60 + op1[i],0xF0); // Set the attack to fast and the decay to slow
-		YM_WRITE_Databus(2,0x80 + op1[i],0x77); // Set the sustain and release to medium
-		YM_WRITE_Databus(2,0xE0 + op1[i],0x00); // Set the waveform to a sine wave that is made fully positive
+		YM_WRITE_Databus(2,0x20 + op1[i],sound1[0]); // set the multiplier to 1
+		YM_WRITE_Databus(2,0x40 + op1[i],sound1[1]); // set the volume to the loudest volume possible
+		YM_WRITE_Databus(2,0x60 + op1[i],sound1[2]); // Set the attack to fast and the decay to slow
+		YM_WRITE_Databus(2,0x80 + op1[i],sound1[3]); // Set the sustain and release to medium
+		YM_WRITE_Databus(2,0xE0 + op1[i],sound1[4]); // Set the waveform to a kind of sawtooth wave
 
-		YM_WRITE_Databus(2,0x20 + op2[i],0x01); // set the multiplier to 1
-		YM_WRITE_Databus(2,0x40 + op2[i],0x00); // set the volume to the loudest volume possible
-		YM_WRITE_Databus(2,0x60 + op2[i],0xF0); // Set the attack to fast and the decay to slow
-		YM_WRITE_Databus(2,0x80 + op2[i],0x77); // Set the sustain and release to medium
-		YM_WRITE_Databus(2,0xE0 + op2[i],0x00); // Set the waveform to a sine wave that is made fully positive
+		YM_WRITE_Databus(2,0xC0 + i,sound1[5]); // Set the waveform to a kind of sawtooth wave
+
+		YM_WRITE_Databus(2,0x20 + op2[i],sound1[6]); // set the multiplier to 1
+		YM_WRITE_Databus(2,0x40 + op2[i],sound1[7]); // set the volume to the loudest volume possible
+		YM_WRITE_Databus(2,0x60 + op2[i],sound1[8]); // Set the attack to fast and the decay to slow
+		YM_WRITE_Databus(2,0x80 + op2[i],sound1[9]); // Set the sustain and release to medium
+		YM_WRITE_Databus(2,0xE0 + op2[i],sound1[10]); // Set the waveform to a kind of sawtooth wave
 	}
 	for(i=0;i<9;i++)
 	{
