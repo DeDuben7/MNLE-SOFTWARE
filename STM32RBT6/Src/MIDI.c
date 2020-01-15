@@ -76,8 +76,14 @@ uint8_t MIDI_PROC(uint8_t MIDI_MSG)
 
 			if(i==2)				// If the last byte is received
 			{
-				YM_PITCH(DATA[0],DATA[1]);
+				if(DATA[1] == 0) // note off
+					YM_NOTE_OFF(DATA[0],DATA[1]); // Call the Note Off function
+
+				else // note on
+					YM_PITCH(DATA[0],DATA[1]); // Call the Note on function
+
 				NOTE_ON_FLAG = 0;
+				//HAL_UART_Transmit_IT(&huart3, &DATA[1], 1);
 			}
 			return iError;
 		}
